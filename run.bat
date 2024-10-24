@@ -1,0 +1,2 @@
+@echo OFF
+docker run --rm -it --cpus 4 --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name="cs2340-project-2" -v "%CD%\workspace":/app -w="/app" cs2340project2image
