@@ -39,16 +39,9 @@ RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
 # Install python packages
 RUN pip3 install virtualenv ruff
 
-# Install Deno based on architecture
-RUN if [ "$(uname -m)" = "aarch64" ]; then \
-  DENO_URL="https://github.com/denoland/deno/releases/latest/download/deno-aarch64-unknown-linux-gnu.zip"; \
-  else \
-  DENO_URL="https://github.com/denoland/deno/releases/latest/download/deno-x86_64-unknown-linux-gnu.zip"; \
-  fi && \
-  curl -fsSL $DENO_URL -o deno.zip && \
-  unzip deno.zip -d /usr/local/bin && \
-  rm deno.zip && \
-  chmod 755 /usr/local/bin/deno
+# Install Node.js (Replace 'setup_20.x' with 'setup_23.x' if Node.js 23 is available)
+RUN curl -fsSL https://deb.nodesource.com/setup_23.x | bash - \
+  && apt-get install -y nodejs
 
 # Clean up unnecessary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
