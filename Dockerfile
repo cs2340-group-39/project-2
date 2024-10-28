@@ -30,7 +30,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_23.x | bash - \
   && apt-get install -y nodejs
 
 # Install global Node.js packages
-RUN npm install -g localtunnel
+RUN npm config set strict-ssl false
+RUN npm install -g --force tunnelmole
 
 # Clean up unnecessary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
