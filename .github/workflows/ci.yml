@@ -25,24 +25,24 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('**/backend/requirements.txt') }}
 
       - name: Install backend dependencies
-        working-directory: ./backend
+        working-directory: ./workspace/backend
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Install frontend dependencies
-        working-directory: ./frontend
+        working-directory: ./workspace/frontend
         run: |
           npm install
           npm run build
 
       - name: Run migrations
-        working-directory: ./backend
+        working-directory: ./workspace/backend
         run: |
           python manage.py migrate
 
       - name: Run backend tests with coverage
-        working-directory: ./backend
+        working-directory: ./workspace/backend
         env:
           DJANGO_SETTINGS_MODULE: core.settings
         run: |
@@ -81,12 +81,12 @@ jobs:
           key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/frontend/package-lock.json') }}
 
       - name: Install frontend dependencies
-        working-directory: ./frontend
+        working-directory: ./workspace/frontend
         run: |
           npm install
 
       - name: Run frontend tests with coverage
-        working-directory: ./frontend
+        working-directory: ./workspace/frontend
         run: |
           npm run test:ci
 
