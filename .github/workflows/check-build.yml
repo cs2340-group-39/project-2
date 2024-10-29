@@ -2,9 +2,9 @@ name: CI Build and Test
 
 on:
   push:
-    branches: [ "main", "actions-tests" ]
+    branches: [ "main", "actions-tests", "actions-clean" ]
   pull_request:
-    branches: [ "main", "actions-tests" ]
+    branches: [ "main", "actions-tests", "actions-clean" ]
 
 jobs:
   build-and-test:
