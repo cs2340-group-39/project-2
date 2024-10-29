@@ -30,11 +30,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install frontend dependencies
+      - name: Install frontend dependencies #uses build command from proj1
         working-directory: ./workspace/frontend
         run: |
           npm install
           npm run build
+          
 
       - name: Run migrations
         working-directory: ./workspace/backend

@@ -3,6 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
+    "build": "tsc -b && vite build",
     "test:ci": "jest --coverage",
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -13,7 +14,16 @@
     "lint": "expo lint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
