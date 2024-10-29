@@ -34,6 +34,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
   os.getenv("BACKEND_DOMAIN"),
+  '127.0.0.1' #remove eventually
 ]
 
 

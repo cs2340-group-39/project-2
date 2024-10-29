@@ -4,9 +4,9 @@ name: Lint Code Base
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "actions-tests" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "actions-tests" ]
 jobs:
   run-lint:
     runs-on: ubuntu-latest
