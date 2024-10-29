@@ -26,7 +26,7 @@ jobs:
             --health-retries 5
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -94,11 +94,11 @@ jobs:
           source ./venv/bin/activate
           python manage.py migrate
 
-          - name: Run Backend Tests with Coverage
-          working-directory: ./workspace/backend
-          env:
+      - name: Run Backend Tests with Coverage
+        working-directory: ./workspace/backend
+        env:
             DATABASE_URL: postgres://postgres:postgres@localhost:5432/mydatabase
-          run: |
+        run: |
             source ./venv/bin/activate
             coverage run --source='.' manage.py test
             coverage report --fail-under=80
