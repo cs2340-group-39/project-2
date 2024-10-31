@@ -26,34 +26,38 @@ tunnel = None
 
 
 def setup_ngrok():
-  global tunnel
-  # Only set up ngrok if not already running
-  if tunnel is None:
-    try:
-      # Configure and start ngrok
-      tunnel = ngrok.connect(
-        8000, authtoken=os.getenv("NGROK_AUTHTOKEN")
-      )
-      ngrok_url = tunnel.url()
+    global tunnel
+    # Only set up ngrok if not already running
+    if tunnel is None:
+        try:
+            # Configure and start ngrok
+            tunnel = ngrok.connect(
+                8000, authtoken=os.getenv("NGROK_AUTHTOKEN")
+            )
+            ngrok_url = tunnel.url()
 
-      # Update environment variables
-      os.environ["DJANGO_DOMAIN"] = ngrok_url.replace("https://", "")
-      dotenv.set_key(
-        dotenv_file, "DJANGO_DOMAIN", os.environ["DJANGO_DOMAIN"]
-      )
+            # Update environment variables
+            os.environ["DJANGO_DOMAIN"] = ngrok_url.replace(
+                "https://", ""
+            )
+            dotenv.set_key(
+                dotenv_file,
+                "DJANGO_DOMAIN",
+                os.environ["DJANGO_DOMAIN"],
+            )
 
-      print(f"ngrok tunnel established at {ngrok_url}")
-      return ngrok_url
-    except Exception as e:
-      print(str(e))
-      return None
+            print(f"ngrok tunnel established at {ngrok_url}")
+            return ngrok_url
+        except Exception as e:
+            print(str(e))
+            return None
 
 
 def handle_exit(signum, frame):
-  global tunnel
-  if tunnel:
-    ngrok.disconnect(tunnel.url())
-  exit(0)
+    global tunnel
+    if tunnel:
+        ngrok.disconnect(tunnel.url())
+    exit(0)
 
 
 # Register the signal handler
@@ -73,57 +77,57 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = (
-  "django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct"
+    "django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  "localhost",
-  "127.0.0.1",
-  os.getenv("DJANGO_DOMAIN", ""),
+    "localhost",
+    "127.0.0.1",
+    os.getenv("DJANGO_DOMAIN", ""),
 ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-  "django.contrib.admin",
-  "django.contrib.auth",
-  "django.contrib.contenttypes",
-  "django.contrib.sessions",
-  "django.contrib.messages",
-  "django.contrib.staticfiles",
-  "dummy.apps.DummyConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "dummy.apps.DummyConfig",
 ]
 
 MIDDLEWARE = [
-  "django.middleware.security.SecurityMiddleware",
-  "django.contrib.sessions.middleware.SessionMiddleware",
-  "django.middleware.common.CommonMiddleware",
-  "django.middleware.csrf.CsrfViewMiddleware",
-  "django.contrib.auth.middleware.AuthenticationMiddleware",
-  "django.contrib.messages.middleware.MessageMiddleware",
-  "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
-  {
-    "BACKEND": "django.template.backends.django.DjangoTemplates",
-    "DIRS": [],
-    "APP_DIRS": True,
-    "OPTIONS": {
-      "context_processors": [
-        "django.template.context_processors.debug",
-        "django.template.context_processors.request",
-        "django.contrib.auth.context_processors.auth",
-        "django.contrib.messages.context_processors.messages",
-      ],
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
     },
-  },
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
@@ -133,10 +137,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-  "default": {
-    "ENGINE": "django.db.backends.sqlite3",
-    "NAME": BASE_DIR / "db.sqlite3",
-  }
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
 
@@ -144,18 +148,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-  {
-    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-  },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 

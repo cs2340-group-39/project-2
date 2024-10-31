@@ -5,5 +5,5 @@ from .api import api
 app_name = "dummy"
 
 urlpatterns = [
-  path("api/", api.urls),
+    path("api/", api.urls),
 ]
