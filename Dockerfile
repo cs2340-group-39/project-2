@@ -29,7 +29,14 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install ruff --break-system-packages
 
 # Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_23.x | bash - && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh
+RUN bash nodesource_setup.sh
+RUN apt-get install -y nodejs
+RUN npm config set strict-ssl false
+
+# Install Node.js packages
+RUN npm install --global --loglevel verbose yarn
+RUN yarn global add @expo/ngrok@^4.1.0
 
 # Set working directory
 WORKDIR /app
