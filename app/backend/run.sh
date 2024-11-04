@@ -17,6 +17,6 @@ done
 rm "$temp_file"
 
 echo "=== Starting Django Server ==="
-python3 manage.py runserver
+python3 manage.py runserver || kill $ssh_pid
 
 kill $ssh_pid
