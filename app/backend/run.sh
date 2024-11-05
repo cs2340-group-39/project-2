@@ -1,5 +1,3 @@
-#!/bin/bash
-
 temp_file=$(mktemp)
 ssh -p 443 -R0:localhost:8000 a.pinggy.io -T >"$temp_file" 2>&1 &
 
