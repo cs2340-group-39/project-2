@@ -50,7 +50,7 @@ INSTALLED_APPS = [
   "ninja",
   "corsheaders",
   "dummy.apps.DummyConfig",
-  "users.apps.UsersConfig",
+  "users.apps.AppsConfig",
 ]
 
 MIDDLEWARE = [
@@ -144,10 +144,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-  os.getenv("FRONTEND_URL") or "http://example.com",
+  os.getenv("FRONTEND_URL"),
 ]
 CSRF_TRUSTED_ORIGINS = [
-  os.getenv("FRONTEND_URL") or "http://example.com",
+  os.getenv("FRONTEND_URL"),
 ]
 
-# AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "users.CustomUser"
