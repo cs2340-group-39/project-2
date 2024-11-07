@@ -4,6 +4,4 @@ from .api import api
 
 app_name = "dummy"
 
-urlpatterns = [
-  path("api/", api.urls),
-]
+urlpatterns = [path("api/", api.urls)]

@@ -34,7 +34,9 @@ SECRET_KEY = "django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct
 DEBUG = True
 
 ALLOWED_HOSTS = [
-  os.getenv("BACKEND_HOST"),
+    "localhost",
+    "127.0.0.1",
+    os.getenv("DEVELOPMENT_BACKEND_HOST"),
 ]
 
 
@@ -50,36 +52,36 @@ INSTALLED_APPS = [
   "ninja",
   "corsheaders",
   "dummy.apps.DummyConfig",
-  "users.apps.AppsConfig",
+  "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
-  "corsheaders.middleware.CorsMiddleware",
-  "django.middleware.security.SecurityMiddleware",
-  "django.contrib.sessions.middleware.SessionMiddleware",
-  "django.middleware.common.CommonMiddleware",
-  "django.middleware.csrf.CsrfViewMiddleware",
-  "django.contrib.auth.middleware.AuthenticationMiddleware",
-  "django.contrib.messages.middleware.MessageMiddleware",
-  "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
 
 TEMPLATES = [
-  {
-    "BACKEND": "django.template.backends.django.DjangoTemplates",
-    "DIRS": [],
-    "APP_DIRS": True,
-    "OPTIONS": {
-      "context_processors": [
-        "django.template.context_processors.debug",
-        "django.template.context_processors.request",
-        "django.contrib.auth.context_processors.auth",
-        "django.contrib.messages.context_processors.messages",
-      ],
-    },
-  },
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ]
+        },
+    }
 ]
 
 WSGI_APPLICATION = "project.wsgi.application"
@@ -89,14 +91,14 @@ WSGI_APPLICATION = "project.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-  "default": {
-    "ENGINE": "django.db.backends.postgresql",
-    "NAME": os.getenv("PGDATABASE"),
-    "USER": os.getenv("PGUSER"),
-    "PASSWORD": os.getenv("PGPASSWORD"),
-    "HOST": os.getenv("PGHOST"),
-    "PORT": os.getenv("PGPORT"),
-  },
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("PGDATABASE"),
+        "USER": os.getenv("PGUSER"),
+        "PASSWORD": os.getenv("PGPASSWORD"),
+        "HOST": os.getenv("PGHOST"),
+        "PORT": os.getenv("PGPORT"),
+    }
 }
 
 
@@ -104,18 +106,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-  {
-    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-  },
-  {
-    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-  },
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+    },
 ]
 
 
@@ -144,10 +146,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-  os.getenv("FRONTEND_URL"),
+  os.getenv("FRONTEND_URL") or "http://example.com",
 ]
 CSRF_TRUSTED_ORIGINS = [
-  os.getenv("FRONTEND_URL"),
+  os.getenv("FRONTEND_URL") or "http://example.com",
 ]
 
-AUTH_USER_MODEL = "users.CustomUser"
+# AUTH_USER_MODEL = "users.CustomUser"

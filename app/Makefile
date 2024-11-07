@@ -1,5 +1,5 @@
 run-backend:
-	cd backend && source ./run.sh
+	$(MAKE) -C backend -j2 all
 
 run-frontend:
-	cd frontend && npx expo start --tunnel
+	$(MAKE) -C frontend
