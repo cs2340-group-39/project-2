@@ -43,16 +43,16 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-  "django.contrib.admin",
-  "django.contrib.auth",
-  "django.contrib.contenttypes",
-  "django.contrib.sessions",
-  "django.contrib.messages",
-  "django.contrib.staticfiles",
-  "ninja",
-  "corsheaders",
-  "dummy.apps.DummyConfig",
-  "users.apps.UsersConfig",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "ninja",
+    "corsheaders",
+    "dummy.apps.DummyConfig",
+    "users.apps.UsersConfig",
 ]
 
 MIDDLEWARE = [
@@ -146,10 +146,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-  os.getenv("FRONTEND_URL") or "http://example.com",
+    os.getenv("FRONTEND_URL") or "http://example.com"
 ]
 CSRF_TRUSTED_ORIGINS = [
-  os.getenv("FRONTEND_URL") or "http://example.com",
+    os.getenv("FRONTEND_URL") or "http://example.com"
 ]
 
 # AUTH_USER_MODEL = "users.CustomUser"
