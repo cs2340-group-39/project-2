@@ -4,8 +4,13 @@ services:
   frontend:
     container_name: wrapped_frontend
     build: ./frontend
+    environment:
+      - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
     ports:
       - "8081:8081"
+      - "19000:19000"
+      - "19001:19001"
+    tty: true
   backend:
     container_name: wrapped_backend
     build: ./backend

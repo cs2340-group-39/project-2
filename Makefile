@@ -12,4 +12,4 @@ reset:
 	docker-compose up
 
 cleanup:
-	docker prune
+	docker system prune

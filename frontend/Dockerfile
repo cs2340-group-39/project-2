@@ -1,14 +1,11 @@
-FROM node:alpine
+FROM node:23-slim
 
+ENV TERM=xterm-256color
 WORKDIR /usr/src/app
 
-RUN npm install -g corepack
-RUN corepack enable
-RUN npm install -g @expo/ngrok@^4.1.0
-
-COPY package.json yarn.lock ./
-RUN npm install expo
-RUN yarn install
+COPY package.json package-lock.json ./
+RUN npm install -g expo @expo/ngrok
+RUN npm install
 COPY . .
 
 EXPOSE 8081
