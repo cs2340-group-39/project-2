@@ -1,0 +1,28 @@
+name: wrapped
+
+services:
+  frontend:
+    container_name: wrapped_frontend
+    build: ./frontend
+    ports:
+      - "8081:8081"
+  backend:
+    container_name: wrapped_backend
+    build: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+  database:
+    container_name: wrapped_database
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
