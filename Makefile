@@ -1,4 +1,4 @@
-.PHONY: setup reset
+.PHONY: setup teardown reset cleanup
 
 setup:
 	docker-compose up
@@ -10,3 +10,6 @@ reset:
 	docker-compose down
 	docker-compose build
 	docker-compose up
+
+cleanup:
+	docker prune
