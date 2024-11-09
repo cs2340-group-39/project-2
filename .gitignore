@@ -13,3 +13,6 @@
 
 # Extension Data
 .mypy_cache
+
+# MacOS
+.DS_Store
