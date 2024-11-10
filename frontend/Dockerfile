@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install -g expo @expo/ngrok
 RUN npm install
+RUN npm rebuild lightningcss --update-binary
 COPY . .
 
 EXPOSE 8081
