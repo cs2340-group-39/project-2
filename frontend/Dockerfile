@@ -1,14 +1,16 @@
-FROM node:23-slim
+FROM node:23.1-slim
 
 ENV TERM=xterm-256color
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
-RUN npm install -g expo @expo/ngrok
-RUN npm install
-RUN npm rebuild lightningcss --update-binary
+RUN corepack enable
+RUN yarn set version stable
+
+COPY package.json yarn.lock ./
+RUN yarn config set nodeLinker node-modules
+RUN yarn install
 COPY . .
 
-EXPOSE 8081
+EXPOSE 8081 19000 19001
 
-CMD [ "npx", "expo", "start", "--tunnel" ]
+CMD [ "yarn", "expo", "start", "--tunnel" ]

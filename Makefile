@@ -1,15 +1,15 @@
-.PHONY: setup teardown reset cleanup
+.PHONY: start stop restart cleanup
 
-setup:
-	docker-compose up
+start:
+	docker-compose up --build -d
 
-teardown:
+stop:
 	docker-compose down
 
-reset:
+restart:
 	docker-compose down
 	docker-compose build
-	docker-compose up
+	docker-compose up -d
 
 cleanup:
 	docker system prune
