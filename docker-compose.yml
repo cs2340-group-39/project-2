@@ -25,7 +25,7 @@ services:
     tty: true
     volumes:
       - ./frontend:/usr/src/app
-      - /usr/src/app/node_modules
+      - node_modules:/usr/src/app/node_modules
 
   backend:
     container_name: wrapped_backend
@@ -51,3 +51,4 @@ services:
 
 volumes:
   postgres_data:
+  node_modules:
