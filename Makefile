@@ -4,10 +4,10 @@ start:
 	docker-compose up --build -d
 
 stop:
-	docker-compose down
+	docker-compose down -v
 
 restart:
-	docker-compose down
+	docker-compose down -v
 	docker-compose build
 	docker-compose up -d
 

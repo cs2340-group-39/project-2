@@ -17,6 +17,6 @@ Under the "Containers" section in Docker Desktop, there should be a running cont
 - Click on the container you want to work in
 
   Docker is configured to save your changes within the container to your local machine as well (Hopefully, Please make sure it is doing this)
-  Once all the containers are running, you can find the app in your browser by simply typing `http://localhost`. No port is required. `http://localhost` will be forwarding `wrapped_frontend`, while `http://localhost/api` will be forwarding `wrapped_backend`.
+  Once all the containers are running, you can find the app in your browser by simply typing `http://app.localhost`. No port is required. `http://app.localhost` will be forwarding `wrapped_frontend`, while `http://internal.localhost` will be forwarding `wrapped_backend`.
 
 Note that this app is still not hosted, and there is no public URL yet. I am working on this at the moment.
