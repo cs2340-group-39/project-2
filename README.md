@@ -15,6 +15,7 @@ Under the "Containers" section in Docker Desktop, there should be a running cont
 - Find the button that has a symbol that looks like "><" in the bottom left corner of your VSCode window
 - Select "Attach to Running Container" from the dropdown menu
 - Click on the container you want to work in
+- Navigate to the folder you want to work in by typing in the search bar /usr/src/app
 
   Docker is configured to save your changes within the container to your local machine as well (Hopefully, Please make sure it is doing this)
   Once all the containers are running, you can find the app in your browser by simply typing `http://app.localhost`. No port is required. `http://app.localhost` will be forwarding `wrapped_frontend`, while `http://internal.localhost` will be forwarding `wrapped_backend`.
