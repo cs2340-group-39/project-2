@@ -1,0 +1,2 @@
+# TODO: This compose file should be used for deployments, while the
+#   one in the root directory should be used for local development.
