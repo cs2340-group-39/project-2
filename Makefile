@@ -1,4 +1,4 @@
-.PHONY: start stop restart cleanup django-createsuperuser django-makemigrations django-migrate
+.PHONY: start stop restart cleanup django-createsuperuser django-makemigrations django-migrate deploy-latest
 
 start:
 	docker-compose up --build -d --remove-orphans
@@ -22,3 +22,6 @@ django-makemigrations:
 
 django-migrate:
 	docker-compose run backend python /usr/src/app/manage.py migrate
+
+deploy-latest:
+	echo "Not Implemented"

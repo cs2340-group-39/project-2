@@ -1,6 +1,5 @@
 name: wrapped
 
-
 services:
   nginx:
     image: nginx:latest
@@ -11,7 +10,7 @@ services:
       - frontend
       - backend
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
 
   frontend:
     container_name: wrapped_frontend
@@ -26,6 +25,8 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - node_modules:/usr/src/app/node_modules
+    depends_on:
+      - backend
 
   backend:
     container_name: wrapped_backend
@@ -47,7 +48,6 @@ services:
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
 
 volumes:
   postgres_data:
