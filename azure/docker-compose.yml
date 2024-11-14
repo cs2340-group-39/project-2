@@ -13,15 +13,14 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
 
   frontend:
-    image: wrapped.azurecr.io/frontend
-    environment:
-      - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
-    tty: true
+    container_name: wrapped_frontend
+    image: wrapped.azurecr.io/wrapped/frontend
     depends_on:
       - backend
 
   backend:
-    image: wrapped.azurecr.io/backend
+    container_name: wrapped_backend
+    image: wrapped.azurecr.io/wrapped/backend
     depends_on:
       - database
 

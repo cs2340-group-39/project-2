@@ -11,6 +11,6 @@ RUN yarn config set nodeLinker node-modules
 RUN yarn install
 COPY . .
 
-EXPOSE 8081 19000 19001
+EXPOSE 3000
 
-CMD [ "yarn", "expo", "start", "--tunnel" ]
+CMD [ "yarn", "run", "dev" ]
