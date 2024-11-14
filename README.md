@@ -9,15 +9,6 @@ Under the "Containers" section in Docker Desktop, there should be a running cont
 - `wrapped_database` is running the Postgres database used by Django
 - `wrapped_nginx` is running the Nginx reverse proxy
 
-  For each of these containers, there is a section called "Logs" where you can see the logs that the container is outputting. For `wrapped_frontend`, you can find the QR Code for Expo Go under this section. For `wrapped_backend`, you can see Django Logs here. There is another section called "Exec" where you can run commands for the respective container. For example, run Django migration commands here (Maybe?).
-  If you want to code in a consistent development environment, you can use VSCode's "Remote Development" extension and attach to the respective container you want to work in. To do this:
+  For each of these containers, there is a section called "Logs" where you can see the logs that the container is outputting. For `wrapped_frontend`, you can find the QR Code for Expo Go under this section. For `wrapped_backend`, you can see Django Logs here. There is another section called "Exec" where you can run commands for the respective container. To run one off commands in the docker container, you can follow this template: `docker-compose run <Container Name ('backend' or 'frontend')> <Command (For Example: 'python /usr/src/app/manage.py migrate')>`
 
-- Find the button that has a symbol that looks like "><" in the bottom left corner of your VSCode window
-- Select "Attach to Running Container" from the dropdown menu
-- Click on the container you want to work in
-- Navigate to the folder that contains the source code by typing in the search bar `/usr/src/app`
-
-  Docker is configured to save your changes within the container to your local machine as well (Hopefully, Please make sure it is doing this)
-  Once all the containers are running, you can find the app in your browser by simply typing `http://app.localhost`. No port is required. `http://localhost/` will be forwarding `wrapped_frontend`, while `http://localhost/app/` will be forwarding `wrapped_backend`.
-
-Note that this app is still not hosted, and there is no public URL yet. I am working on this at the moment.
+  Once all the containers are running, you can find the app in your browser by simply typing `http://localhost/`. No port is required. `http://localhost/` will be forwarding `wrapped_frontend`, while `http://localhost/app/` will be forwarding `wrapped_backend`. Django Admin can be found on `http://localhost/admin/`. The `azure` branch of this repository has been deployed using Azure App Services, and can be publicly accessed at `wrapped.azurewebsites.net`. Please note that only the frontend is publicly accessible at this URL. You cannot access the admin panel here. (TODO: enable this functionality?)
