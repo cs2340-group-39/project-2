@@ -1,4 +1,4 @@
-import { Atom, AudioWaveform } from "@tamagui/lucide-icons";
+import { Atom, AudioWaveform, Save, Settings2 } from "@tamagui/lucide-icons";
 import { Link, Tabs } from "expo-router";
 import { Button, useTheme } from "tamagui";
 
@@ -35,10 +35,31 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="saves"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <AudioWaveform color={color} />,
+          title: "Saved Duos",
+          tabBarIcon: ({ color }) => <Save color={color} />,
+          headerRight: () => (
+            <Link href="/modal" asChild>
+              <Button mr="$4" bg="$purple8" color="$purple12">
+                Hello!
+              </Button>
+            </Link>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => <Settings2 color={color} />,
+          headerRight: () => (
+            <Link href="/modal" asChild>
+              <Button mr="$4" bg="$purple8" color="$purple12">
+                Hello!
+              </Button>
+            </Link>
+          ),
         }}
       />
     </Tabs>
