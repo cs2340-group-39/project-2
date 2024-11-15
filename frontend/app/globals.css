@@ -19,3 +19,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: 'Wrapped';
+  src: url('/app/fonts/Christmas.ttf') format('ttf'),
+       url('/app/fonts/Christmas.ttf') format('ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Wrapped';
+  src: url('/app/fonts/Christmas.ttf') format('ttf'),
+       url('/app/fonts/Christmas.ttf') format('ttf');
+  font-weight: 700;
+  font-style: normal;
+}

@@ -1,15 +1,24 @@
-// pages/auth/signin.tsx
-
+import AnimatedBackground from '@/components/AnimatedBackground';
 import React from 'react';
-import AuthForm from '../../../components/AuthForm';
+import SignInForm from '@/components/SignInForm';
+import styles from '@/components/SignInPage.module.css';
+
 
 const SignInPage = () => {
-  const handleSignIn = (formData: { email: string; password: string }) => {
-    console.log('Sign In Data:', formData);
-    
-  };
+  return (
+    <div className={styles.container}>
+      <div className={styles.background}>
+        <AnimatedBackground />
+      </div>
 
-  return <AuthForm type="signin" onSubmit={handleSignIn} />;
+      <div className={styles.headerText}>Welcome to CS Group 39's</div>
+      <div className={styles.customText}>Spotify Wrapped!</div>
+
+      <div className={styles.formContainer}>
+        <SignInForm />
+      </div>
+    </div>
+  );
 };
 
 export default SignInPage;
