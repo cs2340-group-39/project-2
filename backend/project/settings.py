@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +43,9 @@ INSTALLED_APPS = [
     "corsheaders",
     "dummy.apps.DummyConfig",
     "users.apps.UsersConfig",
+    "wraps.apps.WrapsConfig",
+    "social.apps.SocialConfig",
+    "games.apps.GamesConfig",
 ]
 
 MIDDLEWARE = [
@@ -82,12 +86,39 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {"options": "-c search_path=wrapped"},
+        "NAME": os.getenv("SUPABASE_DB_NAME"),
+        "USER": os.getenv("SUPABASE_DB_USER"),
+        "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
+        "HOST": os.getenv("SUPABASE_DB_HOST"),
+        "PORT": os.getenv("SUPABASE_DB_PORT"),
+    },
+    "authentication": {
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {"options": "-c search_path=auth"},
+        "NAME": os.getenv("SUPABASE_DB_NAME"),
+        "USER": os.getenv("SUPABASE_DB_USER"),
+        "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
+        "HOST": os.getenv("SUPABASE_DB_HOST"),
+        "PORT": os.getenv("SUPABASE_DB_PORT"),
+    },
+    "public": {
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {"options": "-c search_path=public"},
+        "NAME": os.getenv("SUPABASE_DB_NAME"),
+        "USER": os.getenv("SUPABASE_DB_USER"),
+        "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
+        "HOST": os.getenv("SUPABASE_DB_HOST"),
+        "PORT": os.getenv("SUPABASE_DB_PORT"),
+    },
+    "local": {
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "database",
         "PORT": "5432",
-    }
+    },
 }
 
 
