@@ -1,1 +1,0 @@
-This directory contains files used for deployment to Azure App Services. Only I (Arjun) have access to the portal since it is linked to my financial information. Contact me if you need to update something regarding the deployment.

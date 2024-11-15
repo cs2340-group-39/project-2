@@ -1,23 +1,17 @@
-# NOTE: This is the docker-compose file used in production. It should be
-#   standalone, and it cannot depend on other local files. Also, only
-#   one port can be opened in this file by any container as restricted
-#   by Azure App Services.
-
-name: wrapped
-
 services:
   frontend:
     container_name: wrapped_frontend
-    image: wrapped.azurecr.io/wrapped/frontend
+    image: asheshadri2005/wrapped:frontend
+    restart: always
     ports:
-      # HOST:CONTAINER
-      - "80:3000"
+      - "3000:3000"
     depends_on:
       - backend
 
   backend:
     container_name: wrapped_backend
-    image: wrapped.azurecr.io/wrapped/backend
+    image: asheshadri2005/wrapped:backend
+    restart: always
     environment:
       - SECRET_KEY=django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct
       - SUPABASE_DB_HOST=aws-0-us-east-1.pooler.supabase.com
