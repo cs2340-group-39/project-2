@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
@@ -8,12 +8,75 @@ import {
   IconMail,
 } from "@tabler/icons-react";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { fetchSignUp } from "./signup";
 
 export default function SignupForm() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("Form submitted");
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData
+    }));
   };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+  
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      // Send data to backend
+      const response = await fetchSignUp("name");
+      const { success, message } = response.data;
+      console.log(message);
+      if (success) {
+        setSuccess("Account created successfully!");
+        setFormData({
+          firstname:"",
+          lastname:"",
+          email:"",
+          password:"",
+          confirmPassword:"",
+        });
+        router.push("/home");
+      } else {
+        setError("Failed to sign up.");
+      }
+    } catch (err: any) {
+      if (axios.isAxiosError(err)) {
+        console.error("Axios error:", err.response?.data || err.message);
+      } else {
+        console.error("General error: ", err);
+        console.error(err.message);
+        setError("An unexpected error occured.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
       <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
