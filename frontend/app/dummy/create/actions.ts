@@ -1,7 +1,8 @@
 "use server";
 
-export async function createDummyDataAction(name: string) {
+export async function createDummyDataAction(formData: FormData) {
   try {
+    const name = formData.get("name");
     const response = await fetch("http://backend:8000/dummy/api/create-dummy-data", {
       method: "POST",
       headers: {

@@ -8,8 +8,8 @@ export default async function ViewPage() {
   const data = await response.json();
 
   return (
-    <div className="w-screen h-screen">
-      <Card className="place-content-center">
+    <div className="flex items-center justify-center w-screen h-screen">
+      <Card>
         <CardHeader>
           <CardTitle>Dummy Data</CardTitle>
         </CardHeader>
