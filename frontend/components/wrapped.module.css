@@ -1,0 +1,20 @@
+.wrappedContainer {
+    width: 25vw;
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black; /* Border around the wrapped component */
+    border-radius: 8px;      /* Optional rounded corners */
+    padding: 1rem;           /* Optional padding inside the border */
+    background-color: #000;  /* Background color for the container */
+  }
+  
+  .wrappedContent {
+    color: white;            /* White text color for visibility */
+    font-size: 1.2rem;       /* Adjust font size */
+    text-align: center;      /* Center align the content */
+    padding: 1rem;           /* Padding inside the content area */
+    overflow: hidden;        /* Prevent text overflow */
+  }
+  
