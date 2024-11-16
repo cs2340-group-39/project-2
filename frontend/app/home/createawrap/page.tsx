@@ -1,12 +1,12 @@
 import axios from "axios";
+import CreateWrapped from '@/components/CreateWrapped';
+import AnimatedBackground from "@/components/AnimatedBackground";
 
-export default async function DataTest() {
-  const response = await axios.get("http://backend:8000/dummy/api/get-dummy-data");
-  const data = await response.data;
-
+export default function CreateWrappedPage() {
   return (
     <div>
-      <pre>{data.dummy_data}</pre>
+      <AnimatedBackground/>
+      <CreateWrapped/>
     </div>
-  );
+  )
 }

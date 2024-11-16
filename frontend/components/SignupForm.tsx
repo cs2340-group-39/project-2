@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { fetchSignUp } from "./signup";
+import { fetchSignUp } from "../lib/signup";
 
 export default function SignupForm() {
   const [formData, setFormData] = useState({
