@@ -1,8 +1,8 @@
 ruff
-
 django
 django-cors-headers
 django-ninja
-
 psycopg
 psycopg2-binary
+supabase
+gunicorn

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-export default async function ViewPage() {
+export default async function Page() {
   const response = await fetch("http://backend:8000/dummy/api/get-dummy-data", {
     method: "GET",
   });
@@ -9,7 +9,7 @@ export default async function ViewPage() {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen">
-      <Card>
+      <Card className="overflow-y-scroll h-3/4">
         <CardHeader>
           <CardTitle>Dummy Data</CardTitle>
         </CardHeader>

@@ -1,10 +1,12 @@
+import Form from "next/form";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import Form from "next/form";
+
 import { createDummyDataAction } from "./actions";
 
-export default function CreatePage() {
+export default function Page() {
   return (
     <div className="flex items-center justify-center w-screen h-screen">
       <Card>
@@ -15,7 +17,7 @@ export default function CreatePage() {
         <CardContent>
           <Form action={createDummyDataAction} className="space-y-4">
             <div className="space-y-2">
-              <Input type="text" name="name" placeholder="Enter name..." required className="w-full" />
+              <Input type="text" name="name" placeholder="Name" required className="w-full" />
             </div>
             <Button type="submit" className="w-full">
               Create

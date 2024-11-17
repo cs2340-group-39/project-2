@@ -1,4 +1,4 @@
-FROM node:23.1-slim as build
+FROM node:23.1-slim
 
 ENV TERM=xterm-256color
 WORKDIR /usr/src/app
