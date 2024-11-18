@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .api import users_api
+from .api import api as users_api
 
 app_name = "users"
 

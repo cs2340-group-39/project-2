@@ -3,6 +3,9 @@ services:
     container_name: wrapped_frontend
     image: asheshadri2005/wrapped:frontend
     restart: always
+    environment:
+      - SUPABASE_URL=
+      - SUPABASE_SERVICE_ROLE_KEY=
     ports:
       - "3000:3000"
     depends_on:
@@ -19,3 +22,5 @@ services:
       - SUPABASE_DB_PORT=6543
       - SUPABASE_DB_USER=postgres.ghabyrvbdvupowhfzopm
       - SUPABASE_DB_PASSWORD=B70qVPQD8ORBmO7Q
+      - SUPABASE_URL=
+      - SUPABASE_SERVICE_ROLE_KEY=

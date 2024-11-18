@@ -13,11 +13,15 @@ export function SignupForm() {
     <Card className="mx-auto max-w-sm">
       <CardHeader>
         <CardTitle className="text-2xl">Signup</CardTitle>
-        <CardDescription>Enter your email below to signup for your account.</CardDescription>
+        <CardDescription>Enter your username and email below to signup for your account.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
           <Form action={signupUserAction} className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Username</Label>
+              <Input id="username" type="username" name="username" placeholder="user" required />
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" name="email" placeholder="user@gatech.edu" required />

@@ -1,8 +1,13 @@
 ruff
+python-dotenv
 django
 django-cors-headers
 django-ninja
 psycopg
 psycopg2-binary
 supabase
+PyJWT
+bcrypt
+spotipy
+celery
 gunicorn

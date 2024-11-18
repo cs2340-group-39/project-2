@@ -13,9 +13,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load Environment File
+dotenv_path = BASE_DIR / ".env.development"
+load_dotenv(dotenv_path=dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -41,7 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ninja",
     "corsheaders",
+    "overrides.apps.OverridesConfig",
     "dummy.apps.DummyConfig",
+    "services.apps.ServicesConfig",
     "users.apps.UsersConfig",
     "wraps.apps.WrapsConfig",
     "social.apps.SocialConfig",
@@ -57,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "users.middleware.SupabaseAuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -86,32 +94,13 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {"options": "-c search_path=wrapped"},
         "NAME": os.getenv("SUPABASE_DB_NAME"),
         "USER": os.getenv("SUPABASE_DB_USER"),
         "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
         "HOST": os.getenv("SUPABASE_DB_HOST"),
         "PORT": os.getenv("SUPABASE_DB_PORT"),
     },
-    "authentication": {
-        "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {"options": "-c search_path=auth"},
-        "NAME": os.getenv("SUPABASE_DB_NAME"),
-        "USER": os.getenv("SUPABASE_DB_USER"),
-        "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
-        "HOST": os.getenv("SUPABASE_DB_HOST"),
-        "PORT": os.getenv("SUPABASE_DB_PORT"),
-    },
-    "public": {
-        "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {"options": "-c search_path=public"},
-        "NAME": os.getenv("SUPABASE_DB_NAME"),
-        "USER": os.getenv("SUPABASE_DB_USER"),
-        "PASSWORD": os.getenv("SUPABASE_DB_PASSWORD"),
-        "HOST": os.getenv("SUPABASE_DB_HOST"),
-        "PORT": os.getenv("SUPABASE_DB_PORT"),
-    },
-    "local": {
+    "hosted": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "postgres",
         "USER": "postgres",
@@ -131,6 +120,16 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
+
+# Password Hashers
+
+PASSWORD_HASHERS = (
+    "django.contrib.auth.hashers.BCryptPasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.MD5PasswordHasher",
+)
 
 
 # Internationalization
@@ -156,6 +155,40 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # CORS Configuration
+
 CORS_ALLOW_ALL_ORIGINS = True
 
-# AUTH_USER_MODEL = "users.CustomUser"
+
+# Supabase Configuration
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+SUPABASE_JWT_SECRET = os.getenv("SUPABASE_JWT_SECRET")
+
+
+# Django Authentication Configuration
+
+AUTH_USER_MODEL = "users.SupabaseUser"
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "users.backends.SupabaseCredentialsAuthenticationBackend",
+    "users.backends.SupabaseTokenAuthenticationBackend",
+]
+
+
+# Email Configuration
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.resend.com"
+
+EMAIL_PORT = 465
+
+EMAIL_HOST_USER = os.getenv("RESEND_USERNAME")
+
+EMAIL_HOST_PASSWORD = os.getenv("RESEND_API_KEY")
+
+EMAIL_USE_TLS = False

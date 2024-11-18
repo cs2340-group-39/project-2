@@ -11,5 +11,8 @@ restart:
 	docker-compose build
 	docker-compose up -d
 
+production:
+	echo "Not Implemented"
+
 prune:
 	docker system prune
