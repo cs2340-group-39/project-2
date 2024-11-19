@@ -28,10 +28,10 @@ export default async function Page() {
         </CardHeader>
         <CardContent>
           <div className="flex justify-center gap-4 w-full">
-            <Button variant="secondary" className="w-full" onClick={logoutUserAction}>
+            <Button variant="destructive" className="w-full" onClick={logoutUserAction}>
               Yes
             </Button>
-            <Button variant="secondary" className="w-full" onClick={redirectUserToDashboardAction}>
+            <Button variant="outline" className="w-full" onClick={redirectUserToDashboardAction}>
               No
             </Button>
           </div>
