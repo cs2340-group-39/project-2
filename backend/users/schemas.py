@@ -2,4 +2,6 @@ from ninja import Schema
 
 
 class UserSchema(Schema):
-    pass
+    uuid: str
+    username: str
+    email: str

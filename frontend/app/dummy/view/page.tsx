@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export default async function Page() {
-  const response = await fetch("http://backend:8000/dummy/api/get-dummy-data", {
+  const response = await fetch("http://backend:8000/private/dummy/api/get-dummy-data", {
     method: "GET",
   });
   const data = await response.json();

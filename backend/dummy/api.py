@@ -1,12 +1,12 @@
 from typing import List
 
 from django.http import HttpRequest
-from ninja import NinjaAPI
+from ninja import NinjaAPI, Swagger
 
 from .models import DummyModel
 from .schemas import DummyModelRequestSchema, DummyModelResponseSchema, ErrorSchema
 
-api = NinjaAPI(urls_namespace="dummy")
+api = NinjaAPI(urls_namespace="dummy:api", docs=Swagger(), docs_url="/docs/")
 
 
 @api.post("create-dummy-data", response={200: DummyModelResponseSchema, 400: ErrorSchema})

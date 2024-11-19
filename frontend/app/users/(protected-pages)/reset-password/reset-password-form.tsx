@@ -1,5 +1,4 @@
 import Form from "next/form";
-import Link from "next/link";
 
 import { FormMessage, Message } from "@/components/blocks/form-message";
 import { Button } from "@/components/ui/button";
@@ -7,40 +6,37 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { forgotPasswordUserAction } from "./actions";
+import { resetPasswordUserAction } from "./actions";
 
-export function ForgotPasswordForm(props: { searchParams: Message }) {
+export function ResetPasswordForm(props: { searchParams: Message }) {
   const searchParams = props.searchParams;
 
   return (
     <Card className="min-w-full mx-auto">
       <CardHeader>
         <CardTitle className="text-2xl">Forgot Password</CardTitle>
-        <CardDescription>
-          Enter your email below. If an account exists, we will send you an email further instructions.
-        </CardDescription>
+        <CardDescription>Enter your new password below.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <Form action={forgotPasswordUserAction} className="grid gap-4">
+          <Form action={resetPasswordUserAction} className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" name="email" placeholder="user@gatech.edu" required />
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+              </div>
+              <Input id="password" type="password" name="password" required />
+            </div>
+            <div className="grid gap-2">
+              <div className="flex items-center">
+                <Label htmlFor="password">Retype Password</Label>
+              </div>
+              <Input id="confirm_password" type="password" name="confirmPassword" required />
             </div>
             <FormMessage message={searchParams} />
             <Button type="submit" className="w-full">
-              Send Email
+              Reset Password
             </Button>
           </Form>
-        </div>
-        <div className="mt-4 text-center text-sm">
-          <Link href="/users/signup" className="underline">
-            Signup
-          </Link>{" "}
-          or{" "}
-          <Link href="/users/login" className="underline">
-            Login
-          </Link>
         </div>
       </CardContent>
     </Card>

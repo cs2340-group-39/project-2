@@ -1,6 +1,7 @@
 import Form from "next/form";
 import Link from "next/link";
 
+import { FormMessage, Message } from "@/components/blocks/form-message";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,9 +9,11 @@ import { Label } from "@/components/ui/label";
 
 import { loginUserAction, loginUserWithSpotifyAction } from "./actions";
 
-export function LoginForm() {
+export function LoginForm(props: { searchParams: Message }) {
+  const searchParams = props.searchParams;
+
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="min-w-full mx-auto">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>Enter your email below to login to your account.</CardDescription>
@@ -31,6 +34,7 @@ export function LoginForm() {
               </div>
               <Input id="password" type="password" name="password" required />
             </div>
+            <FormMessage message={searchParams} />
             <Button type="submit" className="w-full">
               Login
             </Button>

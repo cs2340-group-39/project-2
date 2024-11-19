@@ -4,7 +4,7 @@ django
 django-cors-headers
 django-ninja
 psycopg
-psycopg2-binary
+psycopg-binary
 supabase
 PyJWT
 bcrypt

@@ -4,9 +4,9 @@ import { CircleBackground } from "@/components/backgrounds/circle-background/cir
 
 export function UsersLayout({ children }: LayoutProps) {
   return (
-    <div className="flex h-screen w-full items-center justify-center px-4">
+    <div className="flex h-screen w-screen items-center justify-center px-4">
       <CircleBackground />
-      <main>{children}</main>
+      <main className="mx-auto max-w-sm">{children}</main>
     </div>
   );
 }

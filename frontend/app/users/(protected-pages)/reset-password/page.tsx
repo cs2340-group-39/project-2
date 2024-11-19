@@ -5,23 +5,24 @@ import { createClient } from "@/utils/supabase/server";
 import { Message } from "@/components/blocks/form-message";
 import { UsersLayout } from "@/components/layouts/users-layout";
 
-import { SignupForm } from "./signup-form";
+import { ResetPasswordForm } from "./reset-password-form";
 
-export default async function Page(props: { searchParams: Message }) {
+export default async function Page(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
+
   const supabase = await createClient();
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user) {
-    return redirect("/dashboard");
+  if (!user) {
+    return redirect("/users/forgot-password");
   }
 
   return (
     <UsersLayout>
-      <SignupForm searchParams={searchParams} />
+      <ResetPasswordForm searchParams={searchParams} />
     </UsersLayout>
   );
 }

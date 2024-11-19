@@ -1,6 +1,7 @@
 import Form from "next/form";
 import Link from "next/link";
 
+import { FormMessage, Message } from "@/components/blocks/form-message";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,9 +9,19 @@ import { Label } from "@/components/ui/label";
 
 import { signupUserAction, signupUserWithSpotifyAction } from "./actions";
 
-export function SignupForm() {
+export function SignupForm(props: { searchParams: Message }) {
+  const searchParams = props.searchParams;
+
+  if ("message" in searchParams) {
+    return (
+      <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
+        <FormMessage message={searchParams} />
+      </div>
+    );
+  }
+
   return (
-    <Card className="mx-auto max-w-sm">
+    <Card className="min-w-full mx-auto">
       <CardHeader>
         <CardTitle className="text-2xl">Signup</CardTitle>
         <CardDescription>Enter your username and email below to signup for your account.</CardDescription>
@@ -36,8 +47,9 @@ export function SignupForm() {
               <div className="flex items-center">
                 <Label htmlFor="password">Retype Password</Label>
               </div>
-              <Input id="retype_password" type="password" name="retype_password" required />
+              <Input id="confirm_password" type="password" name="confirmPassword" required />
             </div>
+            <FormMessage message={searchParams} />
             <Button type="submit" className="w-full">
               Signup
             </Button>
