@@ -18,7 +18,11 @@ class SupabaseTokenAuthenticationBackend(BaseBackend):
                 token,
                 audience="authenticated",
                 algorithms=["HS256"],
-                options={"verify_signature": False, "verify_aud": True, "verify_exp": True},
+                options={
+                    "verify_signature": False,
+                    "verify_aud": True,
+                    "verify_exp": True,
+                },
             )
 
             uuid = payload["sub"]

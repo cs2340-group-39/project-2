@@ -8,20 +8,20 @@ import { UsersLayout } from "@/components/layouts/users-layout";
 import { SignupForm } from "./signup-form";
 
 export default async function Page(props: { searchParams: Message }) {
-  const searchParams = await props.searchParams;
-  const supabase = await createClient();
+    const searchParams = await props.searchParams;
+    const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
 
-  if (user) {
-    return redirect("/dashboard");
-  }
+    if (user) {
+        return redirect("/dashboard");
+    }
 
-  return (
-    <UsersLayout>
-      <SignupForm searchParams={searchParams} />
-    </UsersLayout>
-  );
+    return (
+        <UsersLayout>
+            <SignupForm searchParams={searchParams} />
+        </UsersLayout>
+    );
 }

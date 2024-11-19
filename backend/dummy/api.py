@@ -21,4 +21,6 @@ def create_dummy_data(request: HttpRequest, data: DummyModelRequestSchema):
 @api.get("get-dummy-data", response=List[DummyModelResponseSchema])
 def get_dummy_data(request: HttpRequest):
     dummy_data = DummyModel.objects.all()
-    return [{"id": dummy_object.id, "name": dummy_object.name} for dummy_object in dummy_data]
+    return [
+        {"id": dummy_object.id, "name": dummy_object.name} for dummy_object in dummy_data
+    ]

@@ -18,7 +18,9 @@ class SupabaseUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password, username=None):
-        user = self.create_user(email=self.normalize_email(email), username=username, password=password)
+        user = self.create_user(
+            email=self.normalize_email(email), username=username, password=password
+        )
 
         user.is_staff = True
         user.is_active = True

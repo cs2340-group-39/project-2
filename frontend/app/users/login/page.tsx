@@ -8,20 +8,20 @@ import { Message } from "@/components/blocks/form-message";
 import { UsersLayout } from "@/components/layouts/users-layout";
 
 export default async function Page(props: { searchParams: Promise<Message> }) {
-  const searchParams = await props.searchParams;
-  const supabase = await createClient();
+    const searchParams = await props.searchParams;
+    const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
 
-  if (user) {
-    return redirect("/dashboard");
-  }
+    if (user) {
+        return redirect("/dashboard");
+    }
 
-  return (
-    <UsersLayout>
-      <LoginForm searchParams={searchParams} />
-    </UsersLayout>
-  );
+    return (
+        <UsersLayout>
+            <LoginForm searchParams={searchParams} />
+        </UsersLayout>
+    );
 }

@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = []
@@ -24,5 +23,5 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=10, unique=True)),
             ],
-        ),
+        )
     ]
