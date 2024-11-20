@@ -4,7 +4,7 @@ from django.conf import settings
 from supabase import Client, ClientOptions, create_client
 
 
-class SupabaseClient:
+class SupabaseClientSingleton:
     _instance: Optional[Client] = None
 
     @classmethod
@@ -24,4 +24,4 @@ class SupabaseClient:
         cls._instance = None
 
 
-supabase = SupabaseClient.get_client()
+supabase = SupabaseClientSingleton.get_client()
