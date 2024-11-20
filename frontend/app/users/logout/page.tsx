@@ -30,7 +30,7 @@ export default async function Page() {
 
     return (
         <UsersLayout>
-            <Card className="min-w-full mx-auto">
+            <Card className="w-[400px] mx-auto">
                 <CardHeader>
                     <CardTitle className="text-2xl">Logout</CardTitle>
                     <CardDescription>

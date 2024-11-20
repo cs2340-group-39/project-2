@@ -30,7 +30,7 @@ export function SignupForm(props: { searchParams: Message }) {
     }
 
     return (
-        <Card className="min-w-full mx-auto">
+        <Card className="w-[400px] mx-auto">
             <CardHeader>
                 <CardTitle className="text-2xl">Signup</CardTitle>
                 <CardDescription>
@@ -80,7 +80,7 @@ export function SignupForm(props: { searchParams: Message }) {
                         <div className="grid gap-2">
                             <div className="flex items-center">
                                 <Label htmlFor="password">
-                                    Retype Password
+                                    Confirm Password
                                 </Label>
                             </div>
                             <Input

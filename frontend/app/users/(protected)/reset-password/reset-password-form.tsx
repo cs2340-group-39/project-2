@@ -18,10 +18,10 @@ export function ResetPasswordForm(props: { searchParams: Message }) {
     const searchParams = props.searchParams;
 
     return (
-        <Card className="min-w-full mx-auto">
+        <Card className="w-[400px] mx-auto">
             <CardHeader>
                 <CardTitle className="text-2xl">
-                    Forgot Password
+                    Reset Password
                 </CardTitle>
                 <CardDescription>
                     Enter your new password below.
@@ -49,7 +49,7 @@ export function ResetPasswordForm(props: { searchParams: Message }) {
                         <div className="grid gap-2">
                             <div className="flex items-center">
                                 <Label htmlFor="password">
-                                    Retype Password
+                                    Confirm Password
                                 </Label>
                             </div>
                             <Input

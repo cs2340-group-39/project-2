@@ -19,7 +19,7 @@ export function ForgotPasswordForm(props: { searchParams: Message }) {
     const searchParams = props.searchParams;
 
     return (
-        <Card className="min-w-full mx-auto">
+        <Card className="w-[400px] mx-auto">
             <CardHeader>
                 <CardTitle className="text-2xl">
                     Forgot Password
