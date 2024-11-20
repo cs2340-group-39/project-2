@@ -13,7 +13,11 @@ export async function forgotPasswordUserAction(formData: FormData) {
     const callbackUrl = formData.get("callbackUrl")?.toString();
 
     if (!email) {
-        return encodedRedirect("error", "/users/forgot-password", "Email is required");
+        return encodedRedirect(
+            "error",
+            "/users/forgot-password",
+            "Email is required"
+        );
     }
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {

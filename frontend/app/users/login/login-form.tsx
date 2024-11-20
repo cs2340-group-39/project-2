@@ -28,7 +28,10 @@ export function LoginForm(props: { searchParams: Message }) {
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
-                    <Form action={loginUserAction} className="grid gap-4">
+                    <Form
+                        action={loginUserAction}
+                        className="grid gap-4"
+                    >
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
@@ -41,7 +44,9 @@ export function LoginForm(props: { searchParams: Message }) {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">
+                                    Password
+                                </Label>
                                 <Link
                                     href="/users/forgot-password"
                                     className="ml-auto inline-block text-sm underline"

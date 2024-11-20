@@ -7,6 +7,8 @@ from .models import SupabaseUser
 
 
 class SupabaseTokenAuthenticator(HttpBearer):
-    def authenticate(self, request, token: str) -> Optional[SupabaseUser]:
+    def authenticate(
+        self, request, token: str
+    ) -> Optional[SupabaseUser]:
         user = backend_authenticate(request, token=token)
         return user if user and user.is_authenticated else None

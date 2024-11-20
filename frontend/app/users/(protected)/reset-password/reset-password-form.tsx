@@ -20,15 +20,24 @@ export function ResetPasswordForm(props: { searchParams: Message }) {
     return (
         <Card className="min-w-full mx-auto">
             <CardHeader>
-                <CardTitle className="text-2xl">Forgot Password</CardTitle>
-                <CardDescription>Enter your new password below.</CardDescription>
+                <CardTitle className="text-2xl">
+                    Forgot Password
+                </CardTitle>
+                <CardDescription>
+                    Enter your new password below.
+                </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
-                    <Form action={resetPasswordUserAction} className="grid gap-4">
+                    <Form
+                        action={resetPasswordUserAction}
+                        className="grid gap-4"
+                    >
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">
+                                    Password
+                                </Label>
                             </div>
                             <Input
                                 id="password"
@@ -39,7 +48,9 @@ export function ResetPasswordForm(props: { searchParams: Message }) {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Retype Password</Label>
+                                <Label htmlFor="password">
+                                    Retype Password
+                                </Label>
                             </div>
                             <Input
                                 id="confirm_password"

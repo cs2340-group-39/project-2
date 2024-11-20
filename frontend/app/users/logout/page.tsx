@@ -12,7 +12,10 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-import { logoutUserAction, redirectUserToDashboardAction } from "./actions";
+import {
+    logoutUserAction,
+    redirectUserToDashboardAction,
+} from "./actions";
 
 export default async function Page() {
     const supabase = await createClient();
@@ -30,7 +33,9 @@ export default async function Page() {
             <Card className="min-w-full mx-auto">
                 <CardHeader>
                     <CardTitle className="text-2xl">Logout</CardTitle>
-                    <CardDescription>Are you sure you want to log out?</CardDescription>
+                    <CardDescription>
+                        Are you sure you want to log out?
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="flex justify-center gap-4 w-full">

@@ -21,7 +21,11 @@ export async function signupUserAction(formData: FormData) {
     }
 
     if (password !== confirmPassword) {
-        return encodedRedirect("error", "/users/signup", "Passwords must match");
+        return encodedRedirect(
+            "error",
+            "/users/signup",
+            "Passwords must match"
+        );
     }
 
     const { error } = await supabase.auth.signUp({

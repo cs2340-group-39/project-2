@@ -21,15 +21,20 @@ export function ForgotPasswordForm(props: { searchParams: Message }) {
     return (
         <Card className="min-w-full mx-auto">
             <CardHeader>
-                <CardTitle className="text-2xl">Forgot Password</CardTitle>
+                <CardTitle className="text-2xl">
+                    Forgot Password
+                </CardTitle>
                 <CardDescription>
-                    Enter your email below. If an account exists, we will send you an
-                    email further instructions.
+                    Enter your email below. If an account exists, we
+                    will send you an email further instructions.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
-                    <Form action={forgotPasswordUserAction} className="grid gap-4">
+                    <Form
+                        action={forgotPasswordUserAction}
+                        className="grid gap-4"
+                    >
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
                             <Input

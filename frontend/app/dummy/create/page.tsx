@@ -23,7 +23,10 @@ export default function Page() {
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Form action={createDummyDataAction} className="space-y-4">
+                    <Form
+                        action={createDummyDataAction}
+                        className="space-y-4"
+                    >
                         <div className="space-y-2">
                             <Input
                                 type="text"

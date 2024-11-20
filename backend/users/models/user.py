@@ -1,4 +1,8 @@
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    BaseUserManager,
+    PermissionsMixin,
+)
 from django.db import models
 from services.supabase import supabase
 
@@ -19,7 +23,9 @@ class SupabaseUserManager(BaseUserManager):
 
     def create_superuser(self, email, password, username=None):
         user = self.create_user(
-            email=self.normalize_email(email), username=username, password=password
+            email=self.normalize_email(email),
+            username=username,
+            password=password,
         )
 
         user.is_staff = True
@@ -32,7 +38,9 @@ class SupabaseUserManager(BaseUserManager):
 
 
 class SupabaseUser(AbstractBaseUser, PermissionsMixin):
-    uuid = models.UUIDField(unique=True, editable=False, primary_key=True)
+    uuid = models.UUIDField(
+        unique=True, editable=False, primary_key=True
+    )
 
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=36, unique=True, blank=True)

@@ -1,20 +1,27 @@
-import threading
+from typing import Optional
 
 from django.conf import settings
-from django.utils.functional import SimpleLazyObject
 from supabase import Client, ClientOptions, create_client
 
-_supabase_local = threading.local()
+
+class SupabaseClient:
+    _instance: Optional[Client] = None
+
+    @classmethod
+    def get_client(cls) -> Client:
+        if cls._instance is None:
+            cls._instance = create_client(
+                settings.SUPABASE_URL,
+                settings.SUPABASE_KEY,
+                options=ClientOptions(
+                    auto_refresh_token=False, persist_session=False
+                ),
+            )
+        return cls._instance
+
+    @classmethod
+    def reset_client(cls) -> None:
+        cls._instance = None
 
 
-def _get_supabase() -> Client:
-    if not hasattr(_supabase_local, "client"):
-        _supabase_local.client = create_client(
-            settings.SUPABASE_URL,
-            settings.SUPABASE_KEY,
-            options=ClientOptions(auto_refresh_token=False, persist_session=False),
-        )
-    return _supabase_local.client
-
-
-supabase: Client = SimpleLazyObject(_get_supabase)
+supabase = SupabaseClient.get_client()

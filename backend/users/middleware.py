@@ -10,7 +10,9 @@ class SupabaseAuthenticationMiddleware(MiddlewareMixin):
         super().__init__(get_response)
 
     def process_request(self, request: HttpRequest):
-        if request.user is not None and not isinstance(request.user, AnonymousUser):
+        if request.user is not None and not isinstance(
+            request.user, AnonymousUser
+        ):
             return self.get_response(request)
 
         request.user = AnonymousUser()

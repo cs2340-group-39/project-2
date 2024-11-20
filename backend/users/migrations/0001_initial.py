@@ -26,7 +26,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name="SupabaseUser",
             fields=[
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "password",
+                    models.CharField(
+                        max_length=128, verbose_name="password"
+                    ),
+                ),
                 (
                     "last_login",
                     models.DateTimeField(
@@ -44,11 +49,22 @@ class Migration(migrations.Migration):
                 (
                     "uuid",
                     models.UUIDField(
-                        editable=False, primary_key=True, serialize=False, unique=True
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                        unique=True,
                     ),
                 ),
-                ("email", models.EmailField(max_length=254, unique=True)),
-                ("username", models.CharField(blank=True, max_length=36, unique=True)),
+                (
+                    "email",
+                    models.EmailField(max_length=254, unique=True),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        blank=True, max_length=36, unique=True
+                    ),
+                ),
                 ("is_staff", models.BooleanField(default=False)),
                 ("is_active", models.BooleanField(default=False)),
                 ("created_at", models.DateTimeField(auto_now_add=True)),

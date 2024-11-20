@@ -13,7 +13,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { signupUserAction, signupUserWithSpotifyAction } from "./actions";
+import {
+    signupUserAction,
+    signupUserWithSpotifyAction,
+} from "./actions";
 
 export function SignupForm(props: { searchParams: Message }) {
     const searchParams = props.searchParams;
@@ -31,12 +34,16 @@ export function SignupForm(props: { searchParams: Message }) {
             <CardHeader>
                 <CardTitle className="text-2xl">Signup</CardTitle>
                 <CardDescription>
-                    Enter your username and email below to signup for your account.
+                    Enter your username and email below to signup for
+                    your account.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
-                    <Form action={signupUserAction} className="grid gap-4">
+                    <Form
+                        action={signupUserAction}
+                        className="grid gap-4"
+                    >
                         <div className="grid gap-2">
                             <Label htmlFor="email">Username</Label>
                             <Input
@@ -59,7 +66,9 @@ export function SignupForm(props: { searchParams: Message }) {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">
+                                    Password
+                                </Label>
                             </div>
                             <Input
                                 id="password"
@@ -70,7 +79,9 @@ export function SignupForm(props: { searchParams: Message }) {
                         </div>
                         <div className="grid gap-2">
                             <div className="flex items-center">
-                                <Label htmlFor="password">Retype Password</Label>
+                                <Label htmlFor="password">
+                                    Retype Password
+                                </Label>
                             </div>
                             <Input
                                 id="confirm_password"
