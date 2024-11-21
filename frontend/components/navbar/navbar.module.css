@@ -1,0 +1,57 @@
+/* app/components/Navbar.module.css */
+
+.navbar {
+  width: 100%;
+  padding: 20px 40px;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 10; /* Ensures the navbar stays above other elements */
+}
+
+.logo a {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.navLinks li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.navLinks li a:hover {
+  color: #1db954; /* Spotify Green */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 15px 20px;
+  }
+
+  .navLinks {
+    gap: 20px;
+  }
+
+  .logo a {
+    font-size: 20px;
+  }
+
+  .navLinks li a {
+    font-size: 14px;
+  }
+}
