@@ -4,7 +4,6 @@ import React from 'react';
 import Navbar from '@/components/navbar/page';
 import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './SignInPage.module.css';
-import { UsersLayout } from "@/components/layouts/users-layout";
 import { Message } from "@/components/blocks/form-message";
 import { createClient } from "@/utils/supabase/server";
 import { LoginForm } from "./login-form";
@@ -26,26 +25,26 @@ export default async function Page(props: {
 
   return (
     <div className={styles.container}>
-    {/* Animated Background */}
-    <ShapesBackground />
+      {/* Animated Background */}
+      <ShapesBackground />
 
-    {/* Navigation Bar */}
-    <Navbar />
+      {/* Navigation Bar */}
+      <Navbar />
 
-    {/* Main Content */}
-    <div className={styles.mainContent}>
-      {/* Hero Section */}
-      <div className={styles.hero}>
-        <h1 className={styles.headerText}>Welcome to CS Group 39's</h1>
-        <h2 className={styles.customText}>Spotify Wrapped!</h2>
-      </div>
+      {/* Main Content */}
+      <div className={styles.mainContent}>
+        {/* Hero Section */}
+        <div className={styles.hero}>
+          <h1 className={styles.headerText}>Welcome to CS Group 39's</h1>
+          <h2 className={styles.customText}>Spotify Wrapped!</h2>
+        </div>
 
-      {/* Sign-In Form */}
-      <div className={styles.formContainer}>
-        <LoginForm searchParams={searchParams}/>
+        {/* Sign-In Form */}
+        <div className={styles.formContainer}>
+          <LoginForm searchParams={searchParams}/>
+        </div>
       </div>
     </div>
-  </div>
   );
 }
 

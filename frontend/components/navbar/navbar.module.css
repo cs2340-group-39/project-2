@@ -38,13 +38,48 @@
   color: #1db954; /* Spotify Green */
 }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 15px 20px;
   }
 
   .navLinks {
-    gap: 20px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 20px;
+    transform: translateY(-150%);
+    opacity: 0;
+    pointer-events: none;
+
+  }
+
+  .navLinks.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   .logo a {
