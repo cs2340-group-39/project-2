@@ -51,6 +51,8 @@ INSTALLED_APPS = [
   "corsheaders",
   "dummy.apps.DummyConfig",
   "users.apps.UsersConfig",
+  'spotify'
+  'spotify.apps.SpotifyConfig'
 ]
 
 MIDDLEWARE = [

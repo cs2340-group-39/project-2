@@ -23,3 +23,5 @@ def logout_user(request: HttpRequest):
   return {
     "success": False,
   }
+
+

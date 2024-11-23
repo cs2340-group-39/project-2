@@ -9,3 +9,4 @@ def get_dummy_data(request: HttpRequest):
   return {
     "dummy_data": "Hello, World!",
   }
+
