@@ -1,7 +1,10 @@
 import Form from "next/form";
 import Link from "next/link";
 
-import { FormMessage, Message } from "@/components/blocks/form-message";
+import {
+    FormMessage,
+    Message,
+} from "@/components/miscellaneous/form-message";
 import { Button } from "@/components/ui/button";
 import {
     Card,

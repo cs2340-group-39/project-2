@@ -4,8 +4,8 @@ import { LoginForm } from "./login-form";
 
 import { createClient } from "@/utils/supabase/server";
 
-import { Message } from "@/components/blocks/form-message";
 import { UsersLayout } from "@/components/layouts/users-layout";
+import { Message } from "@/components/miscellaneous/form-message";
 
 export default async function Page(props: {
     searchParams: Promise<Message>;

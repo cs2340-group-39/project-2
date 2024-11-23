@@ -2,8 +2,8 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
-import { Message } from "@/components/blocks/form-message";
 import { UsersLayout } from "@/components/layouts/users-layout";
+import { Message } from "@/components/miscellaneous/form-message";
 
 import { ResetPasswordForm } from "./reset-password-form";
 
