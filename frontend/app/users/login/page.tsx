@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { LoginForm } from "./login-form";
+import { LoginForm } from "../signin/login-form";
 
 import { createClient } from "@/utils/supabase/server";
 
