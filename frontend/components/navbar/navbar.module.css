@@ -37,11 +37,12 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-
 .navLinks {
   list-style: none;
   display: flex;
   gap: 30px;
+  justify-content: center; /* Center links horizontally */
+  align-items: center;
 }
 
 .navLinks li a {

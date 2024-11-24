@@ -24,7 +24,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ onThemeChange, theme, toggleMenu, isMenuOpen }) => {
 
   return (
-    <nav className={`${styles.navbar} ${theme === "dark" ? styles.dark : ""}`}>
+    <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Link href="/">Wrap</Link>
       </div>
@@ -37,13 +37,21 @@ const Navbar: React.FC<NavbarProps> = ({ onThemeChange, theme, toggleMenu, isMen
 
       <ul className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
         <li>
-          <Link href="/" className={theme === "dark" ? styles.darkText : ""}>
+          <Link href="/" className={theme === "dark" ? styles.lightText : styles.darkText}>
             Meet the Developers
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/dashboard"
+            className={`${theme === "dark" ? styles.lightText : styles.darkText}`}
+          >
+            Dashboard
           </Link>
         </li>
 
         {/* Dropdown for theme selection */}
-        <Menubar className={`${styles.menuButton} ${theme === "dark" ? styles.darkText : ""}`}>
+        <Menubar className={`${styles.menuButton} ${theme === "dark" ? styles.lightText : ""}`}>
           <MenubarMenu>
             <MenubarTrigger>Themes</MenubarTrigger>
              <MenubarContent>

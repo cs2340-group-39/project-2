@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
+import { UsersLayout } from "@/components/layouts/users-layout";
 
 export default async function Page() {
     const supabase = await createClient();
@@ -14,11 +15,10 @@ export default async function Page() {
     }
 
     return (
-        <>
-            <h1>Settings Page</h1>
-            <pre className="text-xs font-mono p-3 rounded border max-h-32 overflow-auto">
-                {JSON.stringify(user, null, 2)}
-            </pre>
-        </>
+        <UsersLayout>
+            <main>
+                
+            </main>
+        </UsersLayout>
     );
 }
