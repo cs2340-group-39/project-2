@@ -3,9 +3,22 @@
 import React from 'react';
 import styles from './ShapesBackground.module.css';
 
-const ShapesBackground: React.FC = () => {
+interface ShapesBackgroundProps {
+  theme: "light" | "dark" | "mutedBlue";
+}
+
+const ShapesBackground: React.FC<ShapesBackgroundProps> = ({theme}) => {
   return (
-    <div className={styles.background}>
+    
+    <div
+            className={`fixed top-0 left-0 w-full h-full z-[-2] overflow-hidden pointer-events-none ${
+                theme === "dark"
+                    ? "bg-black"
+                    : theme === "mutedBlue"
+                    ? "bg-[#4A90E2]" // Muted blue
+                    : "bg-white"
+            }`}
+        >
       {/* Shape 1 - Top Left Gradient Circle */}
       <div className={`${styles.shape} ${styles.shape1}`} />
 

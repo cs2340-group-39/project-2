@@ -12,11 +12,19 @@
   background: transparent; /* Ensures no background color overrides container */
 }
 
+.light {
+  background-color: #ffffff; /* Light mode background */
+}
+
+.dark {
+  background-color: #000000; /* Dark mode background */
+}
+
 /* Base styles for all shapes */
 .shape {
   position: absolute;
   border-radius: 50%;
-  opacity: 0.5;
+  opacity: 0.8;
   will-change: transform, opacity;
   animation-timing-function: linear;
 }

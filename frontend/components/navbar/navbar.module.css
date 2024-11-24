@@ -1,15 +1,32 @@
 /* app/components/Navbar.module.css */
 
+.menuButton {
+  background-color: #1db954; /* Spotify Green color */
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+.menuButton:hover {
+  background-color: #1aa644; /* Slightly darker green on hover */
+}
+
 .navbar {
   width: 100%;
   padding: 20px 40px;
   background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
+  justify-content: space-between; /* Distribute space between logo, menu, and links */
+  align-items: center; /* Center the items vertically */
+  position: relative; /* Ensure it's above other content */
   top: 0;
-  z-index: 10; /* Ensures the navbar stays above other elements */
+  left: 0;
+  z-index: 20; /* Make sure navbar is on top of other elements */
+  pointer-events: all; /* Ensure navbar is interactable */
 }
 
 .logo a {
@@ -19,6 +36,7 @@
   text-decoration: none;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
 
 .navLinks {
   list-style: none;
@@ -36,6 +54,14 @@
 
 .navLinks li a:hover {
   color: #1db954; /* Spotify Green */
+}
+
+.navbar.dark {
+  background-color: #333333; /* Darker background for dark mode */
+}
+
+.navLinks li a.darkText {
+  color: #000000; /* Dark mode text color */
 }
 
 .hamburger {
