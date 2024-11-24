@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/navbar/page';
 import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './ViewWrapped.module.css';
+import { UsersLayout } from '@/components/layouts/users-layout';
 
 interface Wrapped {
   id: string;
@@ -34,14 +35,7 @@ const ViewWrapped: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* Animated Background */}
-      <div className={styles.shapesBackground}>
-        <ShapesBackground />
-      </div>
-
-      {/* Navigation Bar */}
-      <Navbar />
-
+      <UsersLayout>
       {/* Main Content */}
       <div className={styles.mainContent}>
         <h1 className={styles.headerText}>Your Saved Wraps</h1>
@@ -62,6 +56,7 @@ const ViewWrapped: React.FC = () => {
           </div>
         )}
       </div>
+      </UsersLayout>
     </div>
   );
 };

@@ -40,7 +40,7 @@ export function UsersLayout({ children }: LayoutProps) {
     const textColorClass = theme === "dark" || theme === "mutedBlue" ? "text-white" : "text-black";
 
     return (
-        <div className={`relative min-h-screen w-screen items-center justify-center px-4`}>
+        <div className={`flex-col relative h-screen w-screen items-center justify-center px-4`}>
             {/* Background and Navbar */}
             <ShapesBackground theme={theme} />
             <div className="w-full">
@@ -54,7 +54,7 @@ export function UsersLayout({ children }: LayoutProps) {
             
             {/* Content area */}
             <div
-                className={`flex w-full flex-col items-center justify-center px-4 transition-colors duration-300 ${
+                className={`flex-grow flex w-full flex-col justify-center items-center transition-colors duration-300 ${
                     textColorClass
                 }`}
             >

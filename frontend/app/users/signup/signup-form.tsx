@@ -105,7 +105,7 @@ export function SignupForm(props: { searchParams: Message }) {
                 </div>
                 <div className="mt-4 text-center text-sm">
                     Already have an account?{" "}
-                    <Link href="/users/login" className="underline">
+                    <Link href="/users/signin" className="underline">
                         Login
                     </Link>
                 </div>

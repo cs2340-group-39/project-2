@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Navbar from '@/components/navbar/page';
 import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './LogoutPage.module.css';
+import { UsersLayout } from '@/components/layouts/users-layout';
 
 const LogoutPage: React.FC = () => {
   // Handler for logging out
@@ -18,12 +19,7 @@ const LogoutPage: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* Animated Background */}
-      <ShapesBackground />
-
-      {/* Navigation Bar */}
-      <Navbar />
-
+      <UsersLayout>
       {/* Main Content */}
       <div className={styles.mainContent}>
         {/* Hero Section */}
@@ -45,6 +41,7 @@ const LogoutPage: React.FC = () => {
           </Link>
         </div>
       </div>
+      </UsersLayout>
     </div>
   );
 };

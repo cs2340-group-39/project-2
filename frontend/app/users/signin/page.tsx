@@ -8,6 +8,7 @@ import { Message } from "@/components/blocks/form-message";
 import { createClient } from "@/utils/supabase/server";
 import { LoginForm } from "./login-form";
 import { redirect } from "next/navigation";
+import { UsersLayout } from '@/components/layouts/users-layout';
 
 export default async function Page(props: {
   searchParams: Promise<Message>;
@@ -24,13 +25,7 @@ export default async function Page(props: {
   }
 
   return (
-    <div className={styles.container}>
-      {/* Animated Background */}
-      <ShapesBackground />
-
-      {/* Navigation Bar */}
-      <Navbar />
-
+      <UsersLayout>
       {/* Main Content */}
       <div className={styles.mainContent}>
         {/* Hero Section */}
@@ -44,32 +39,6 @@ export default async function Page(props: {
           <LoginForm searchParams={searchParams}/>
         </div>
       </div>
-    </div>
+      </UsersLayout>
   );
 }
-
-const SignInPage: React.FC = () => {
-  return (
-    <div className={styles.container}>
-      {/* Animated Background */}
-      <ShapesBackground />
-
-      {/* Navigation Bar */}
-      <Navbar />
-
-      {/* Main Content */}
-      <div className={styles.mainContent}>
-        {/* Hero Section */}
-        <div className={styles.hero}>
-          <h1 className={styles.headerText}>Welcome to CS Group 39's</h1>
-          <h2 className={styles.customText}>Spotify Wrapped!</h2>
-        </div>
-
-        {/* Sign-In Form */}
-        <div className={styles.formContainer}>
-          <SignInPage/>
-        </div>
-      </div>
-    </div>
-  );
-};

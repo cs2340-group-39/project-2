@@ -4,6 +4,7 @@ import React from 'react';
 import Navbar from '@/components/navbar/page';
 import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './CreateWrapped.module.css';
+import { UsersLayout } from '@/components/layouts/users-layout';
 
 const CreateWrapped: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -17,14 +18,7 @@ const CreateWrapped: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {/* Animated Background */}
-      <div className={styles.shapesBackground}>
-        <ShapesBackground />
-      </div>
-
-      {/* Navigation Bar */}
-      <Navbar />
-
+      <UsersLayout>
       {/* Main Content */}
       <div className={styles.mainContent}>
         <h1 className={styles.headerText}>Create Your Wrapped</h1>
@@ -44,6 +38,7 @@ const CreateWrapped: React.FC = () => {
           <button type="button" className={styles.cancelButton} onClick={handleCancel}>Cancel</button>
         </form>
       </div>
+      </UsersLayout>
     </div>
   );
 };

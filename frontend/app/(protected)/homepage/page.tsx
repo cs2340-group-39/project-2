@@ -5,18 +5,12 @@ import Link from 'next/link';
 import Navbar from '@/components/navbar/page';
 import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './Homepage.module.css';
+import { UsersLayout } from '@/components/layouts/users-layout';
 
 const Homepage: React.FC = () => {
   return (
     <div className={styles.container}>
-      {/* Animated Background */}
-      <div className={styles.shapesBackground}>
-        <ShapesBackground />
-      </div>
-
-      {/* Navigation Bar */}
-      <Navbar />
-
+      <UsersLayout>
       {/* Main Content */}
       <div className={styles.mainContent}>
         {/* Hero Section */}
@@ -48,6 +42,7 @@ const Homepage: React.FC = () => {
           </button>
         </div>
       </div>
+      </UsersLayout>
     </div>
   );
 };
