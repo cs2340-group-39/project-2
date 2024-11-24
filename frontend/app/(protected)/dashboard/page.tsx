@@ -19,7 +19,7 @@ export default async function Page() {
     } = await supabase.auth.getUser();
 
     if (!user) {
-        return redirect("/users/login");
+        return redirect("/users/signin");
     }
 
     const backendUser = await getUserFromBackendAction(
