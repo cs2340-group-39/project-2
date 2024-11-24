@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
 import { LayoutProps } from "./layout-props";
-
 import { useEffect, useState } from "react";
 
 import ShapesBackground from "@/components/backgrounds/ShapesBackground/ShapesBackground";
@@ -21,11 +20,9 @@ export function UsersLayout({ children }: LayoutProps) {
     };
 
     useEffect(() => {
-        // Check system theme preference
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         setIsDarkMode(prefersDark);
 
-        // Listen for theme changes
         const themeChangeHandler = (e: MediaQueryListEvent) => {
             setIsDarkMode(e.matches);
         };
@@ -35,7 +32,6 @@ export function UsersLayout({ children }: LayoutProps) {
 
         localStorage.setItem("theme", theme);
 
-        // Cleanup listener
         return () => {
             mediaQuery.removeEventListener("change", themeChangeHandler);
         };
@@ -44,21 +40,21 @@ export function UsersLayout({ children }: LayoutProps) {
     const textColorClass = theme === "dark" || theme === "mutedBlue" ? "text-white" : "text-black";
 
     return (
-        <div className={`relative h-screen w-screen items-center justify-center px-4 overflow-hidden`}>
+        <div className={`relative min-h-screen w-screen items-center justify-center px-4`}>
             {/* Background and Navbar */}
             <ShapesBackground theme={theme} />
-            <div className = "w-full">
-            <Navbar 
-                onThemeChange={handleThemeChange}
-                theme={theme}
-                toggleMenu={toggleMenu}
-                isMenuOpen={isMenuOpen}
-            />
+            <div className="w-full">
+                <Navbar 
+                    onThemeChange={handleThemeChange}
+                    theme={theme}
+                    toggleMenu={toggleMenu}
+                    isMenuOpen={isMenuOpen}
+                />
             </div>
             
             {/* Content area */}
             <div
-                className={`flex h-full w-full flex-col items-center justify-center px-4 transition-colors duration-300 ${
+                className={`flex w-full flex-col items-center justify-center px-4 transition-colors duration-300 ${
                     textColorClass
                 }`}
             >

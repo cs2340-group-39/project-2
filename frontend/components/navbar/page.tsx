@@ -37,7 +37,7 @@ const Navbar: React.FC<NavbarProps> = ({ onThemeChange, theme, toggleMenu, isMen
 
       <ul className={`${styles.navLinks} ${isMenuOpen ? styles.open : ''}`}>
         <li>
-          <Link href="/" className={theme === "dark" ? styles.lightText : styles.darkText}>
+          <Link href="/meetdevs" className={theme === "dark" ? styles.lightText : styles.darkText}>
             Meet the Developers
           </Link>
         </li>
