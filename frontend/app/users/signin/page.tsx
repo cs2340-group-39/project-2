@@ -1,8 +1,6 @@
 // app/users/signin/page.tsx
 //TODO replace or replaced by login page
 import React from 'react';
-import Navbar from '@/components/navbar/page';
-import ShapesBackground from '@/components/backgrounds/ShapesBackground/ShapesBackground';
 import styles from './SignInPage.module.css';
 import { Message } from "@/components/blocks/form-message";
 import { createClient } from "@/utils/supabase/server";
