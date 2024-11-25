@@ -13,47 +13,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import {
-    signupUserAction,
-    signupUserWithSpotifyAction,
-} from "./actions";
+import { loginUserAction, loginUserWithSpotifyAction } from "./actions";
 
-export function SignupForm(props: { searchParams: Message }) {
+export function LoginForm(props: { searchParams: Message }) {
     const searchParams = props.searchParams;
-
-    if ("message" in searchParams) {
-        return (
-            <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
-                <FormMessage message={searchParams} />
-            </div>
-        );
-    }
 
     return (
         <Card className="w-[400px] mx-auto">
             <CardHeader>
-                <CardTitle className="text-2xl">Signup</CardTitle>
+                <CardTitle className="text-2xl">Login</CardTitle>
                 <CardDescription>
-                    Enter your username and email below to signup for
-                    your account.
+                    Enter your email below to login to your account.
                 </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="grid gap-4">
                     <Form
-                        action={signupUserAction}
+                        action={loginUserAction}
                         className="grid gap-4"
                     >
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Username</Label>
-                            <Input
-                                id="username"
-                                type="username"
-                                name="username"
-                                placeholder="user"
-                                required
-                            />
-                        </div>
                         <div className="grid gap-2">
                             <Label htmlFor="email">Email</Label>
                             <Input
@@ -69,6 +47,12 @@ export function SignupForm(props: { searchParams: Message }) {
                                 <Label htmlFor="password">
                                     Password
                                 </Label>
+                                <Link
+                                    href="/users/forgot-password"
+                                    className="ml-auto inline-block text-sm underline"
+                                >
+                                    Forgot your password?
+                                </Link>
                             </div>
                             <Input
                                 id="password"
@@ -77,36 +61,23 @@ export function SignupForm(props: { searchParams: Message }) {
                                 required
                             />
                         </div>
-                        <div className="grid gap-2">
-                            <div className="flex items-center">
-                                <Label htmlFor="password">
-                                    Confirm Password
-                                </Label>
-                            </div>
-                            <Input
-                                id="confirm_password"
-                                type="password"
-                                name="confirmPassword"
-                                required
-                            />
-                        </div>
                         <FormMessage message={searchParams} />
                         <Button type="submit" className="w-full">
-                            Signup
+                            Login
                         </Button>
                         <Button
                             variant="outline"
                             className="w-full"
-                            formAction={signupUserWithSpotifyAction}
+                            formAction={loginUserWithSpotifyAction}
                         >
-                            Signup with Spotify
+                            Login with Spotify
                         </Button>
                     </Form>
                 </div>
                 <div className="mt-4 text-center text-sm">
-                    Already have an account?{" "}
-                    <Link href="/users/signin" className="underline">
-                        Login
+                    Don&apos;t have an account?{" "}
+                    <Link href="/users/signup" className="underline">
+                        Signup
                     </Link>
                 </div>
             </CardContent>

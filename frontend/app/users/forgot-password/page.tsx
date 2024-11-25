@@ -2,10 +2,12 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "@/utils/supabase/server";
 
+import { Message } from "@/components/blocks/form-message";
 import { UsersLayout } from "@/components/layouts/users-layout";
-import { Message } from "@/components/miscellaneous/form-message";
 
 import { ForgotPasswordForm } from "./forgot-password-form";
+
+import styles from "./ForgotPassword.module.css";
 
 export default async function Page(props: {
     searchParams: Promise<Message>;
@@ -24,7 +26,11 @@ export default async function Page(props: {
 
     return (
         <UsersLayout>
-            <ForgotPasswordForm searchParams={searchParams} />
+            <div className={styles.mainContent}>
+                <div className={styles.formContainer}>
+                    <ForgotPasswordForm searchParams={searchParams} />
+                </div>
+            </div>
         </UsersLayout>
     );
 }

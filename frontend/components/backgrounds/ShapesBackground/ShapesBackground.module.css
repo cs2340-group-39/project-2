@@ -1,0 +1,343 @@
+/* app/components/ShapesBackground/ShapesBackground.module.css */
+
+.background {
+    position: fixed; /* Keeps the background fixed relative to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Ensures it stays behind other content */
+    overflow: hidden;
+    pointer-events: none; /* Makes it non-interactive */
+    background: transparent; /* Ensures no background color overrides container */
+  }
+  
+  .light {
+    background-color: #ffffff; /* Light mode background */
+  }
+  
+  .dark {
+    background-color: #000000; /* Dark mode background */
+  }
+  
+  /* Base styles for all shapes */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.8;
+    will-change: transform, opacity;
+    animation-timing-function: linear;
+  }
+  
+  /* Shape 1 - Top Left Gradient Circle */
+  .shape1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at center, rgba(29, 185, 84, 0.6), rgba(29, 185, 84, 0));
+    top: -50px;
+    left: -50px;
+    animation: animateShape1 20s infinite;
+  }
+  
+  /* Shape 2 - Bottom Right Gradient Circle */
+  .shape2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle at center, rgba(40, 116, 166, 0.6), rgba(40, 116, 166, 0));
+    bottom: -70px;
+    right: -70px;
+    animation: animateShape2 25s infinite;
+  }
+  
+  /* Shape 3 - Center Blob */
+  .shape3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: animateShape3 30s infinite;
+  }
+  
+  /* Shape 4 - Top Right Vibrant Triangle */
+  .shape4 {
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 173px solid rgba(255, 69, 0, 0.6); /* OrangeRed */
+    top: 10%;
+    right: -100px;
+    animation: animateShape4 22s infinite;
+  }
+  
+  /* Shape 5 - Bottom Left Vibrant Polygon (Hexagon) */
+  .shape5 {
+    width: 120px;
+    height: 104px;
+    background-color: rgba(255, 215, 0, 0.6); /* Gold */
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    bottom: 15%;
+    left: -60px;
+    animation: animateShape5 28s infinite;
+  }
+  
+  /* Shape 6 - Mid Left Vibrant Star */
+  .shape6 {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 40%;
+    left: -40px;
+    background: transparent;
+    clip-path: polygon(
+      50% 0%,
+      61% 35%,
+      98% 35%,
+      68% 57%,
+      79% 91%,
+      50% 70%,
+      21% 91%,
+      32% 57%,
+      2% 35%,
+      39% 35%
+    );
+    background-color: rgba(255, 20, 147, 0.6); /* DeepPink */
+    animation: animateShape6 24s infinite;
+  }
+  
+  /* SVG Shape */
+  .svgShape {
+    position: absolute;
+    opacity: 0.3;
+    will-change: transform, opacity;
+    animation-timing-function: linear;
+  }
+  
+  .svgShape1 {
+    width: 180px;
+    height: 180px;
+    top: 70%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    animation: animateSVGShape1 40s infinite;
+  }
+  
+  /* Animations for Shapes */
+  @keyframes animateShape1 {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(20px, -20px) scale(1.1) rotate(180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(0, 0) scale(1) rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes animateShape2 {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(-20px, 20px) scale(0.9) rotate(-180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(0, 0) scale(1) rotate(-360deg);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes animateShape3 {
+    0% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(-55%, -55%) scale(1.2) rotate(180deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1) rotate(360deg);
+      opacity: 0.3;
+    }
+  }
+  
+  @keyframes animateShape4 {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(10px, 10px) rotate(180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes animateShape5 {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(20px, -10px) scale(1.2) rotate(180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(0, 0) scale(1) rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes animateShape6 {
+    0% {
+      transform: translate(-40px, 0) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(-35px, 10px) rotate(180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-40px, 0) rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes animateSVGShape1 {
+    0% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(-60%, -40%) scale(1.3) rotate(180deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1) rotate(360deg);
+      opacity: 0.3;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .shape1 {
+      width: 200px;
+      height: 200px;
+      top: -30px;
+      left: -30px;
+    }
+  
+    .shape2 {
+      width: 250px;
+      height: 250px;
+      bottom: -50px;
+      right: -50px;
+    }
+  
+    .shape3 {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .shape4 {
+      border-left: 70px solid transparent;
+      border-right: 70px solid transparent;
+      border-bottom: 120px solid rgba(255, 69, 0, 0.6);
+      top: 5%;
+      right: -70px;
+    }
+  
+    .shape5 {
+      width: 100px;
+      height: 86.7px; /* Adjusted for hexagon */
+      bottom: 10%;
+      left: -50px;
+    }
+  
+    .shape6 {
+      width: 0;
+      height: 0;
+      top: 35%;
+      left: -30px;
+      clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+      );
+    }
+  
+    .svgShape1 {
+      width: 120px;
+      height: 120px;
+      top: 60%;
+      left: 35%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .shape1 {
+      width: 150px;
+      height: 150px;
+      top: -20px;
+      left: -20px;
+    }
+  
+    .shape2 {
+      width: 200px;
+      height: 200px;
+      bottom: -40px;
+      right: -40px;
+    }
+  
+    .shape3 {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .shape4 {
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 85px solid rgba(255, 69, 0, 0.6);
+      top: 8%;
+      right: -50px;
+    }
+  
+    .shape5 {
+      width: 80px;
+      height: 69.3px; /* Adjusted for hexagon */
+      bottom: 8%;
+      left: -40px;
+    }
+  
+    .shape6 {
+      top: 30%;
+      left: -20px;
+    }
+  
+    .svgShape1 {
+      width: 100px;
+      height: 100px;
+      top: 65%;
+      left: 40%;
+    }
+  }
+  
