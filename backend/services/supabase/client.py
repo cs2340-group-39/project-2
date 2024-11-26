@@ -5,17 +5,17 @@ from supabase import Client, ClientOptions, create_client
 
 
 class SupabaseClientSingleton:
-  _instance: Optional[Client] = None
+    _instance: Optional[Client] = None
 
-  @classmethod
-  def get_client(cls) -> Client:
-    if cls._instance is None:
-      cls._instance = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY, options=ClientOptions(auto_refresh_token=False, persist_session=False))
-    return cls._instance
+    @classmethod
+    def get_client(cls) -> Client:
+        if cls._instance is None:
+            cls._instance = create_client(settings.SUPABASE_URL, settings.SUPABASE_KEY, options=ClientOptions(auto_refresh_token=False, persist_session=False))
+        return cls._instance
 
-  @classmethod
-  def reset_client(cls) -> None:
-    cls._instance = None
+    @classmethod
+    def reset_client(cls) -> None:
+        cls._instance = None
 
 
 supabase = SupabaseClientSingleton.get_client()
