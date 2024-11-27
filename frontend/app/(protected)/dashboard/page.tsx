@@ -6,6 +6,7 @@ import { getUserFromBackendAction } from "./actions";
 
 import Link from "next/link";
 import { DashboardLayout } from "@/components/layouts/dashboard-layout";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 export default async function Page() {
     const supabase = await createClient();
@@ -26,11 +27,7 @@ export default async function Page() {
 
     return (
         <DashboardLayout>
-            <div>
-                <h1>
-                    Hello World
-                </h1>
-            </div>
+            <div></div>
         </DashboardLayout>
     );
 }
