@@ -3,7 +3,6 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export const updateSession = async (request: NextRequest) => {
     try {
-        // Create an unmodified response
         let response = NextResponse.next({
             request: {
                 headers: request.headers,
@@ -23,13 +22,11 @@ export const updateSession = async (request: NextRequest) => {
                 setAll(cookiesToSet) {
                     try {
                         cookiesToSet.forEach(({ name, value, options }) => {
-                            // Set cookies both on request and response
                             request.cookies.set(name, value);
                             response.cookies.set({
                                 name,
                                 value,
                                 ...options,
-                                // Ensure cookies work across your domain
                                 path: "/",
                                 sameSite: "lax",
                             });
@@ -45,14 +42,9 @@ export const updateSession = async (request: NextRequest) => {
             },
         });
 
-        // Refresh session if expired
-        const {
-            data: { user },
-            error: userError,
-        } = await supabase.auth.getUser();
+        const { error: userError } = await supabase.auth.getUser();
 
         if (userError) {
-            // Instead of redirecting, clear the invalid session cookies
             const cookies = request.cookies.getAll();
             cookies.forEach((cookie) => {
                 if (cookie.name.includes("supabase")) {

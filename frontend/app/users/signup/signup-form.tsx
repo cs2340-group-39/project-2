@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import { FormMessage, Message } from "@/components/miscellaneous/form-message";
@@ -6,7 +8,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { signupUserAction, signupUserWithSpotifyAction } from "./actions";
+import { signupOrLoginUserWithSpotifyAction } from "@/actions/signup-or-login-user-with-spotify-action";
+
+import { signupUserAction } from "./actions";
 
 export function SignupForm(props: { searchParams: Message }) {
     const searchParams = props.searchParams;
@@ -52,10 +56,10 @@ export function SignupForm(props: { searchParams: Message }) {
                         <Button type="submit" className="w-full">
                             Signup
                         </Button>
-                        <Button variant="outline" className="w-full" formAction={signupUserWithSpotifyAction}>
-                            Signup with Spotify
-                        </Button>
                     </form>
+                    <Button type="button" variant="outline" className="w-full" onClick={() => signupOrLoginUserWithSpotifyAction()}>
+                        Signup or Login with Spotify
+                    </Button>
                 </div>
                 <div className="mt-4 text-center text-sm">
                     Already have an account?{" "}

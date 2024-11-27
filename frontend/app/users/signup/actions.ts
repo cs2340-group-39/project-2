@@ -24,7 +24,7 @@ export async function signupUserAction(formData: FormData) {
         email,
         password,
         options: {
-            emailRedirectTo: `${origin}/auth/callback`,
+            emailRedirectTo: `${origin}/auth/callback/`,
         },
     });
 
@@ -34,9 +34,4 @@ export async function signupUserAction(formData: FormData) {
     } else {
         return encodedRedirect("success", "/users/signup", "Thanks for signing up! Please check your email for a verification link.");
     }
-}
-
-export async function signupUserWithSpotifyAction(formData: FormData) {
-    console.log(formData);
-    console.log("Spotify");
 }

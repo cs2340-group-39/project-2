@@ -1,35 +1,43 @@
+import uuid
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
-from services.supabase import supabase
 
 
-class SupabaseUserManager(BaseUserManager):
-    def create_user(self, email, password, username=None):
-        supabase.auth.sign_up({"email": email, "password": password})
+class UserManager(BaseUserManager):
+    def create_user(self, email, password=None, username=None, **extra_fields):
+        if not email:
+            raise ValueError("Users must have an email address")
 
-        user = SupabaseUser.objects.get(email=email)
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+
+        if password:
+            user.set_password(password)
+        else:
+            user.set_unusable_password()
 
         if not username:
-            username = str(user.uuid)
+            username = str(uuid.uuid4())
         user.username = username
 
-        user.save()
-
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password, username=None):
-        user = self.create_user(email=self.normalize_email(email), username=username, password=password)
+    def create_superuser(self, email, password, username=None, **extra_fields):
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("is_active", True)
 
-        user.is_staff = True
-        user.is_active = True
-        user.is_superuser = True
+        if extra_fields.get("is_staff") is not True:
+            raise ValueError("Superuser must have is_staff=True.")
+        if extra_fields.get("is_superuser") is not True:
+            raise ValueError("Superuser must have is_superuser=True.")
 
-        user.save()
-
-        return user
+        return self.create_user(email, password, username, **extra_fields)
 
 
-class SupabaseUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     uuid = models.UUIDField(unique=True, editable=False, primary_key=True)
 
     email = models.EmailField(unique=True)
@@ -44,13 +52,12 @@ class SupabaseUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
 
-    objects = SupabaseUserManager()
+    objects = UserManager()
 
     def get_short_name(self):
         return self.username
 
     def delete(self):
-        supabase.auth.admin.delete_user(self.uuid)
         super().delete()
 
     def __str__(self):

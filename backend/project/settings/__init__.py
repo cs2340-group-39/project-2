@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 if not os.getenv("PRODUCTION"):
-    load_dotenv(dotenv_path=BASE_DIR / ".env.development")
+    load_dotenv(dotenv_path=BASE_DIR / ".env.local")
 
 from .application import *
 from .authentication import *

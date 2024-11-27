@@ -16,13 +16,8 @@ export async function loginUserAction(formData: FormData) {
     });
 
     if (error) {
-        return encodedRedirect("error", "/users/login", error.message);
+        return encodedRedirect("error", "/users/login/", error.message);
     }
 
     return redirect("/dashboard");
-}
-
-export async function loginUserWithSpotifyAction(formData: FormData) {
-    console.log(formData);
-    console.log("Spotify");
 }
