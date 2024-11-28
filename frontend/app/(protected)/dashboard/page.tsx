@@ -25,6 +25,13 @@ export default async function Page() {
         ).data.session?.access_token!
     );
 
+    // Temporary mock data for Spotify Wraps
+    const wraps = [
+        { name: "My 2023 Spotify Wrap", date: "2023-12-01" },
+        { name: "Road Trip Playlist", date: "2023-11-15" },
+        { name: "Summer Vibes", date: "2023-08-20" },
+    ];
+
     return (
         <DashboardLayout>
             <div></div>

@@ -24,7 +24,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface SidebarPrompts {
   onThemeChange: (theme: "light" | "dark" | "mutedBlue") => void;
@@ -49,11 +49,15 @@ export function AppSidebar({ onThemeChange, theme, friends }: SidebarPrompts) {
 
   const spotifyGreen = "bg-green-500 text-white hover:bg-green-600";
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <Sidebar
-      className={`min-h-screen flex flex-col transition-colors duration-300 ${themeClasses[theme]}`}
+      className={`transition-colors duration-300 bg-[hsl(var(--sidebar-background))] text-[hsl(var(--sidebar-foreground))] overflow-hidden`}
     >
-      <SidebarContent className="flex flex-col flex-grow">
+      <SidebarContent className="flex flex-col">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -125,7 +129,14 @@ export function AppSidebar({ onThemeChange, theme, friends }: SidebarPrompts) {
               </Accordion>
 
               {/* Meet the Developers Button */}
-              <div className="mt-auto p-4 justify-center">
+              <div className="mt-auto p-4 justify-center items-center">
+                <Button asChild className={spotifyGreen}>
+                  <a href="/wrapped/create">Create a New Wrap</a>
+                </Button>
+              </div>
+
+              {/* Meet the Developers Button */}
+              <div className="mt-auto p-4 justify-center items-center">
                 <Button asChild className={spotifyGreen}>
                   <a href="/meetdevs">Meet the Developers</a>
                 </Button>

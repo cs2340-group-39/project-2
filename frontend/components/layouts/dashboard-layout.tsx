@@ -41,10 +41,11 @@ export function DashboardLayout({ children }: LayoutProps) {
             : "bg-black text-white";
 
     return (
-        <div className={`flex-col relative h-screen w-screen items-center justify-center px-4`}>
+        <div className="flex flex-col h-screen w-screen overflow-hidden">
             {/* Background and Navbar */}
             <ShapesBackground theme={theme} />
-            <SidebarProvider>
+
+                        <SidebarProvider className="z-20">
                 <AppSidebar 
                     onThemeChange={handleThemeChange}
                     theme={theme}
@@ -57,15 +58,22 @@ export function DashboardLayout({ children }: LayoutProps) {
             </SidebarProvider>
 
             {/* Collapsible for Saved Spotify Wraps */}
-                <Collapsible>
-                    <CollapsibleTrigger className="text-lg font-semibold cursor-pointer">
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-full max-w-[500px] z-50">
+                <Collapsible className="w-[30rem] h-[40rem] rounded-lg p-6 shadow-lg bg-green-500 transition-all">
+                    <CollapsibleTrigger className="text-lg font-bold text-black cursor-pointer justify-center items-center">
                         Saved Spotify Wraps
                     </CollapsibleTrigger>
                     <CollapsibleContent className="mt-4 space-y-2">
                         {wraps.map((wrap, index) => (
                             <div
                                 key={index}
-                                className={`flex items-center justify-between p-3 rounded-lg shadow-sm transition-colors duration-300 ${wrapBackgroundClass}`}
+                                className={`flex flex-col justify-between h-24 p-4 rounded-lg p-4 shadow-md transition-colors duration-300 ${
+                                    theme === "light"
+                                        ? "bg-gray-100 text-black"
+                                        : theme === "mutedBlue"
+                                        ? "bg-blue-800 text-white"
+                                        : "bg-black text-white"
+                                }`}
                             >
                                 <div>
                                     <p className="text-md font-bold">{wrap.name}</p>
@@ -83,6 +91,7 @@ export function DashboardLayout({ children }: LayoutProps) {
                         ))}
                     </CollapsibleContent>
                 </Collapsible>
+            </div>
 
             {/* Content area */}
             <div
