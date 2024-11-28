@@ -4,8 +4,7 @@ services:
     image: asheshadri2005/wrapped:frontend
     restart: always
     environment:
-      - SUPABASE_URL=
-      - SUPABASE_SERVICE_ROLE_KEY=
+      - a=b
     ports:
       - "3000:3000"
     depends_on:
@@ -17,10 +16,3 @@ services:
     restart: always
     environment:
       - SECRET_KEY=django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct
-      - SUPABASE_DB_HOST=aws-0-us-east-1.pooler.supabase.com
-      - SUPABASE_DB_NAME=postgres
-      - SUPABASE_DB_PORT=6543
-      - SUPABASE_DB_USER=postgres.ghabyrvbdvupowhfzopm
-      - SUPABASE_DB_PASSWORD=B70qVPQD8ORBmO7Q
-      - SUPABASE_URL=
-      - SUPABASE_SERVICE_ROLE_KEY=

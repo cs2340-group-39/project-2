@@ -14,7 +14,10 @@ from . import User, api
 
 @api.patch(
   "verify",
-  response={200: UserResponseSchema, 400: UserErrorResponseSchema},
+  response={
+    200: UserResponseSchema,
+    400: UserErrorResponseSchema,
+  },
 )
 def verify(request: HttpRequest, data: UserVerifyRequestSchema):
   try:
@@ -31,7 +34,10 @@ def verify(request: HttpRequest, data: UserVerifyRequestSchema):
       time_diff = (
         timezone.now() - user.email_verification_code_created_at
       )
-      if time_diff.total_seconds() > timedelta(days=1).total_seconds():
+      if (
+        time_diff.total_seconds()
+        > timedelta(days=1).total_seconds()
+      ):
         return 400, UserErrorResponseSchema(
           detail="Verification code has expired. Please request a new one."
         )
