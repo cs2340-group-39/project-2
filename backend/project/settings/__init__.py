@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-if not os.getenv("PRODUCTION"):
-    load_dotenv(dotenv_path=BASE_DIR / ".env.local")
+if os.getenv("DEBUG"):
+  load_dotenv(dotenv_path=BASE_DIR / ".env.local")
 
 from .application import *
 from .authentication import *
@@ -19,5 +19,5 @@ from .email import *
 from .internationalization import *
 from .password import *
 from .public import *
+from .site import *
 from .startup import *
-from .supabase import *

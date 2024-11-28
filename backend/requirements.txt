@@ -5,7 +5,6 @@ django-cors-headers
 django-ninja
 psycopg
 psycopg-binary
-supabase
 PyJWT
 bcrypt
 spotipy

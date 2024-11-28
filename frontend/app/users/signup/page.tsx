@@ -1,27 +1,16 @@
-import { redirect } from "next/navigation";
-
-import { createClient } from "@/utils/supabase/server";
-
 import { UsersLayout } from "@/components/layouts/users-layout";
 import { Message } from "@/components/miscellaneous/form-message";
 
 import { SignupForm } from "./signup-form";
 
 export default async function Page(props: { searchParams: Message }) {
-    const searchParams = await props.searchParams;
-    const supabase = await createClient();
+  const searchParams = await props.searchParams;
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+  // TODO: add redirect if user is logged in
 
-    if (user) {
-        return redirect("/dashboard");
-    }
-
-    return (
-        <UsersLayout>
-            <SignupForm searchParams={searchParams} />
-        </UsersLayout>
-    );
+  return (
+    <UsersLayout>
+      <SignupForm searchParams={searchParams} />
+    </UsersLayout>
+  );
 }

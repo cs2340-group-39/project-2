@@ -7,22 +7,24 @@ import { Message } from "@/components/miscellaneous/form-message";
 
 import { ForgotPasswordForm } from "./forgot-password-form";
 
-export default async function Page(props: { searchParams: Promise<Message> }) {
-    const searchParams = await props.searchParams;
+export default async function Page(props: {
+  searchParams: Promise<Message>;
+}) {
+  const searchParams = await props.searchParams;
 
-    const supabase = await createClient();
+  const supabase = await createClient();
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-    if (user) {
-        return redirect("/users/reset-password");
-    }
+  if (user) {
+    return redirect("/users/reset-password");
+  }
 
-    return (
-        <UsersLayout>
-            <ForgotPasswordForm searchParams={searchParams} />
-        </UsersLayout>
-    );
+  return (
+    <UsersLayout>
+      <ForgotPasswordForm searchParams={searchParams} />
+    </UsersLayout>
+  );
 }
