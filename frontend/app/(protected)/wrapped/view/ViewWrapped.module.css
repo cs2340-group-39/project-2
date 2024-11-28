@@ -1,140 +1,73 @@
-/* ViewWrapped.module.css */
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-    background-color: rgba(18, 18, 18, 0.85); /* Slight transparency to show background */
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .shapesBackground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1; /* Ensures background stays behind content */
-  }
-  
-  .mainContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    z-index: 1; /* Ensures content is above background */
-  }
-  
-  .headerText {
-    font-size: 32px;
-    color: #ffffff;
-    margin-bottom: 30px;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-  }
-  
-  .wrapsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
+.paragraph {
+  font-size: 16px;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.actionButton {
+  padding: 12px 24px;
+  background-color: #1db954; /* Spotify Green */
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actionButton:hover {
+  background-color: #17a44d; /* Darker Green on Hover */
+}
+
+.actionButton:active {
+  transform: scale(0.98);
+}
+
+/* Navigation Buttons */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.navButton:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .navButton {
+    font-size: 20px;
     padding: 10px;
   }
-  
-  .wrapCard {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .wrapTitle {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .wrapDescription {
-    font-size: 16px;
-    color: #b3b3b3;
-    flex-grow: 1;
-  }
-  
-  .wrapActions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .actionButton {
-    background-color: #1db954; /* Spotify Green */
-    color: #ffffff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
-  }
-  
-  .actionButton:hover {
-    background-color: #17a44d; /* Darker Green on Hover */
-  }
-  
-  .actionButton:active {
-    transform: scale(0.98);
-  }
-  
-  .emptyState {
-    text-align: center;
-    color: #b3b3b3;
-    font-size: 18px;
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 50px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 800px) {
-    .wrapsContainer {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-  
-    .wrapCard {
-      padding: 15px;
-    }
-  
-    .wrapTitle {
-      font-size: 18px;
-    }
-  
-    .wrapDescription {
-      font-size: 14px;
-    }
-  
-    .actionButton {
-      font-size: 14px;
-      padding: 8px 12px;
-    }
-  }
-  
-  @media (max-width: 500px) {
-    .headerText {
-      font-size: 24px;
-    }
-  
-    .wrapsContainer {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}
