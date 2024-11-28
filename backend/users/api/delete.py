@@ -5,6 +5,10 @@ from ..schemas import UserErrorResponseSchema, UserResponseSchema
 from . import api
 
 
-@api.delete("delete", response={201: UserResponseSchema, 400: UserErrorResponseSchema}, auth=TokenAuthenticator())
+@api.delete(
+  "delete",
+  response={201: UserResponseSchema, 400: UserErrorResponseSchema},
+  auth=TokenAuthenticator(),
+)
 def delete(request: HttpRequest):
-    pass
+  pass

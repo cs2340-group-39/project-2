@@ -1860,6 +1860,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babylonjs@npm:^7.35.2":
+  version: 7.35.2
+  resolution: "babylonjs@npm:7.35.2"
+  checksum: 10c0/0549c38f6c4dd6033d5a41b7117bfa16be61ee54bb2733dc2e0481c75055fe92ec3a26d411dbd01ac2c9d0c899df6ff4993bef15ee1c3fa4a436a253f94bd4f1
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -3102,11 +3109,13 @@ __metadata:
     "@types/react-dom": "npm:^18.3.1"
     "@types/three": "npm:^0.170.0"
     autoprefixer: "npm:^10.4.20"
+    babylonjs: "npm:^7.35.2"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.8"
     framer-motion: "npm:^11.11.17"
+    jose: "npm:^5.9.6"
     lucide-react: "npm:^0.456.0"
     next: "npm:14.2.8"
     next-themes: "npm:^0.4.3"
@@ -3114,7 +3123,6 @@ __metadata:
     postprocessing: "npm:^6.36.4"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
-    realism-effects: "npm:^1.1.2"
     tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.14"
     tailwindcss-animate: "npm:^1.0.7"
@@ -3932,6 +3940,13 @@ __metadata:
   bin:
     jiti: bin/jiti.js
   checksum: 10c0/05b9ed58cd30d0c3ccd3c98209339e74f50abd9a17e716f65db46b6a35812103f6bde6e134be7124d01745586bca8cc5dae1d0d952267c3ebe55171949c32e56
+  languageName: node
+  linkType: hard
+
+"jose@npm:^5.9.6":
+  version: 5.9.6
+  resolution: "jose@npm:5.9.6"
+  checksum: 10c0/d6bcd8c7d655b5cda8e182952a76f0c093347f5476d74795405bb91563f7ab676f61540310dd4b1531c60d685335ceb600571a409551d2cbd2ab3e9f9fbf1e4d
   languageName: node
   linkType: hard
 
@@ -5100,16 +5115,6 @@ __metadata:
   dependencies:
     picomatch: "npm:^2.2.1"
   checksum: 10c0/6fa848cf63d1b82ab4e985f4cf72bd55b7dcfd8e0a376905804e48c3634b7e749170940ba77b32804d5fe93b3cc521aa95a8d7e7d725f830da6d93f3669ce66b
-  languageName: node
-  linkType: hard
-
-"realism-effects@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "realism-effects@npm:1.1.2"
-  peerDependencies:
-    postprocessing: ">=6.30.1"
-    three: ">=0.148.0"
-  checksum: 10c0/d0d0bb28bea16519b4008daf140b4f6af511a942958a60ea9a6a60deb5e4e2c6e05ff9fad3a33bca7a8fa8ce01703788e01f9bee4a62c138006c4b40fbb18734
   languageName: node
   linkType: hard
 
