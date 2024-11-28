@@ -7,6 +7,6 @@ from .models import User
 
 
 class TokenAuthenticator(HttpBearer):
-  def authenticate(self, request, token: str) -> Optional[User]:
-    user = _authenticate(request, token=token)
-    return user if user and user.is_authenticated else None
+    def authenticate(self, request, token: str) -> Optional[User]:
+        user = _authenticate(request, token=token)
+        return user if user and user.is_authenticated else None

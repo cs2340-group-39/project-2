@@ -6,18 +6,18 @@ import { createClient } from "@/utils/supabase/server";
 import { encodedRedirect } from "@/utils/utils";
 
 export async function loginUserAction(formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const supabase = await createClient();
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+    const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+    });
 
-  if (error) {
-    return encodedRedirect("error", "/users/login/", error.message);
-  }
+    if (error) {
+        return encodedRedirect("error", "/users/login/", error.message);
+    }
 
-  return redirect("/dashboard");
+    return redirect("/dashboard");
 }
