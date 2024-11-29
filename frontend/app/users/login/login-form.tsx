@@ -1,11 +1,9 @@
 "use client";
 
+import Form from "next/form";
 import Link from "next/link";
+import { useActionState } from "react";
 
-import {
-  FormMessage,
-  Message,
-} from "@/components/miscellaneous/form-message";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,12 +15,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { signupOrLoginUserWithSpotifyAction } from "@/actions/signup-or-login-user-with-spotify-action";
-
 import { loginUserAction } from "./actions";
 
-export function LoginForm(props: { searchParams: Message }) {
-  const searchParams = props.searchParams;
+export function LoginForm() {
+  const [loginState, loginDispatch] = useActionState(
+    loginUserAction,
+    undefined
+  );
 
   return (
     <Card className="w-[400px] mx-auto">
@@ -34,7 +33,7 @@ export function LoginForm(props: { searchParams: Message }) {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <form action={loginUserAction} className="grid gap-4">
+          <Form action={loginDispatch} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -45,6 +44,9 @@ export function LoginForm(props: { searchParams: Message }) {
                 required
               />
             </div>
+            {loginState?.errors?.email && (
+              <p className="text-red-500">{loginState.errors.email}</p>
+            )}
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
@@ -62,16 +64,25 @@ export function LoginForm(props: { searchParams: Message }) {
                 required
               />
             </div>
-            <FormMessage message={searchParams} />
+            {loginState?.errors?.password && (
+              <p className="text-red-500">
+                {loginState.errors.password}
+              </p>
+            )}
+            {loginState?.errors?.ambiguous && (
+              <p className="text-red-500">
+                {loginState.errors.ambiguous}
+              </p>
+            )}
             <Button type="submit" className="w-full">
               Login
             </Button>
-          </form>
+          </Form>
           <Button
             type="button"
             variant="outline"
             className="w-full"
-            onClick={() => signupOrLoginUserWithSpotifyAction()}
+            onClick={() => {}}
           >
             Signup or Login with Spotify
           </Button>

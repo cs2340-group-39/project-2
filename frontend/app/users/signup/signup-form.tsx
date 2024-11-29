@@ -1,9 +1,8 @@
+"use client";
+
+import Form from "next/form";
 import Link from "next/link";
 
-import {
-  FormMessage,
-  Message,
-} from "@/components/miscellaneous/form-message";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,20 +14,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { signupOrLoginUserWithSpotifyAction } from "@/actions/signup-or-login-user-with-spotify-action";
-
+import { useActionState } from "react";
 import { signupUserAction } from "./actions";
 
-export function SignupForm(props: { searchParams: Message }) {
-  const searchParams = props.searchParams;
-
-  if ("message" in searchParams) {
-    return (
-      <div className="w-full flex-1 flex items-center h-screen sm:max-w-md justify-center gap-2 p-4">
-        <FormMessage message={searchParams} />
-      </div>
-    );
-  }
+export function SignupForm() {
+  const [signupState, signupDispatch] = useActionState(
+    signupUserAction,
+    undefined
+  );
 
   return (
     <Card className="w-[400px] mx-auto">
@@ -41,7 +34,7 @@ export function SignupForm(props: { searchParams: Message }) {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <form action={signupUserAction} className="grid gap-4">
+          <Form action={signupDispatch} className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Username</Label>
               <Input
@@ -52,6 +45,11 @@ export function SignupForm(props: { searchParams: Message }) {
                 required
               />
             </div>
+            {signupState?.errors?.username && (
+              <p className="text-red-500">
+                {signupState.errors.username}
+              </p>
+            )}
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -62,6 +60,9 @@ export function SignupForm(props: { searchParams: Message }) {
                 required
               />
             </div>
+            {signupState?.errors?.email && (
+              <p className="text-red-500">{signupState.errors.email}</p>
+            )}
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
@@ -73,6 +74,11 @@ export function SignupForm(props: { searchParams: Message }) {
                 required
               />
             </div>
+            {signupState?.errors?.password && (
+              <p className="text-red-500">
+                {signupState.errors.password}
+              </p>
+            )}
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Confirm Password</Label>
@@ -84,16 +90,23 @@ export function SignupForm(props: { searchParams: Message }) {
                 required
               />
             </div>
-            <FormMessage message={searchParams} />
+            {signupState?.errors?.ambiguous && (
+              <p className="text-red-500">
+                {signupState.errors.ambiguous}
+              </p>
+            )}
+            {signupState?.success && <p>{signupState.success}</p>}
             <Button type="submit" className="w-full">
               Signup
             </Button>
-          </form>
-          <form action={signupOrLoginUserWithSpotifyAction}>
-            <Button type="submit" variant="outline" className="w-full">
-              Signup or Login with Spotify
-            </Button>
-          </form>
+          </Form>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => {}}
+          >
+            Signup or Login with Spotify
+          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}

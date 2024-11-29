@@ -2,10 +2,7 @@ import os
 import uuid
 
 from django.conf import settings
-from django.core.mail import (
-  EmailMultiAlternatives,
-  get_connection,
-)
+from django.core.mail import EmailMultiAlternatives, get_connection
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.html import strip_tags
@@ -23,7 +20,7 @@ def send_verification_email(user):
 
   context = {
     "user": user,
-    "verification_url": f"{settings.SITE_URL}/users/api/verify?code={code}&redirect_to={settings.SITE_URL}/users/api/callback",
+    "verification_url": f"{settings.SITE_URL}/users/api/verify?code={code}",
     "site_name": settings.SITE_NAME,
     "valid_for": str(settings.AUTH_VERIFY_EMAIL_TIMEOUT),
   }

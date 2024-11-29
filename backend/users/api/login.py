@@ -10,7 +10,7 @@ from ..utils import generate_tokens
 from . import User, api
 
 
-@api.get(
+@api.post(
   "login",
   response={200: UserResponseSchema, 400: UserErrorResponseSchema},
 )

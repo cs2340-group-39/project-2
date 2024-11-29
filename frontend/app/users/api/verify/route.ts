@@ -1,10 +1,8 @@
-import { encodedRedirect } from "@/utils/utils";
 import { redirect } from "next/navigation";
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const redirectTo = requestUrl.searchParams.get("redirect_to");
 
   const response = await fetch(
     "http://backend:8000/private/users/api/verify",
@@ -29,7 +27,7 @@ export async function GET(request: Request) {
       errorMessage = `Signup failed: ${response.statusText}.`;
     }
 
-    return encodedRedirect("error", "/users/signup", errorMessage);
+    return redirect("users/signup");
   }
 
   let accessToken: string;
@@ -39,14 +37,10 @@ export async function GET(request: Request) {
     accessToken = data.access_token;
     refreshToken = data.refresh_token;
   } catch {
-    return encodedRedirect(
-      "error",
-      "/users/signup",
-      "An unexpected error occurred."
-    );
+    return redirect("/users/signup");
   }
 
   redirect(
-    `${redirectTo}?access_token=${accessToken}&refresh_token=${refreshToken}`
+    `${process.env.NEXT_PUBLIC_BASE_URL}/users/api/callback?access_token=${accessToken}&refresh_token=${refreshToken}`
   );
 }

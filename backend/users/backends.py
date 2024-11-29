@@ -4,6 +4,7 @@ from django.http import HttpRequest
 from jwt import (
   DecodeError,
   ExpiredSignatureError,
+  InvalidAlgorithmError,
   InvalidSignatureError,
   InvalidTokenError,
 )
@@ -44,6 +45,7 @@ class TokenAuthenticationBackend(BaseBackend):
         InvalidTokenError,
         ExpiredSignatureError,
         InvalidSignatureError,
+        InvalidAlgorithmError,
       ):
         return None
 

@@ -25,5 +25,14 @@ class UserErrorResponseSchema(Schema):
   detail: str
 
 
-class TokenVerificationSchema(Schema):
+class TokenVerificationRequestSchema(Schema):
+  access_token: str
+
+
+class TokenVerificationResponseSchema(Schema):
   verified: bool
+
+
+class RefreshSchema(Schema):
+  refresh_token: str
+  access_token: Optional[str] = None

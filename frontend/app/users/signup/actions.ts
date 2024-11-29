@@ -1,19 +1,53 @@
 "use server";
 
-import { encodedRedirect } from "@/utils/utils";
+import { z } from "zod";
 
-export async function signupUserAction(formData: FormData) {
-  const username = formData.get("username")?.toString();
-  const email = formData.get("email")?.toString();
-  const password = formData.get("password")?.toString();
-  const confirmPassword = formData.get("confirmPassword")?.toString();
+const signupSchema = z.object({
+  username: z.string(),
+  email: z.string().email({ message: "Invalid email address." }).trim(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters long." })
+    .trim(),
+  confirmPassword: z
+    .string()
+    .min(8, {
+      message: "Confirm Password must be at least 8 characters long.",
+    })
+    .trim(),
+});
+
+interface SignupActionState {
+  errors?: {
+    username?: string[];
+    email?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+    ambiguous?: string[];
+  };
+  success?: string;
+}
+
+export async function signupUserAction(
+  prevState: any,
+  formData: FormData
+): Promise<SignupActionState> {
+  const result = signupSchema.safeParse(Object.fromEntries(formData));
+
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const { username, email, password, confirmPassword } = result.data;
 
   if (password !== confirmPassword) {
-    return encodedRedirect(
-      "error",
-      "/users/signup",
-      "Passwords do not match."
-    );
+    return {
+      errors: {
+        password: ["Passwords must match."],
+      },
+    };
   }
 
   const response = await fetch(
@@ -40,13 +74,15 @@ export async function signupUserAction(formData: FormData) {
     } catch {
       errorMessage = `Signup failed: ${response.statusText}.`;
     }
-
-    return encodedRedirect("error", "/users/signup", errorMessage);
+    return {
+      errors: {
+        ambiguous: [errorMessage],
+      },
+    };
   }
 
-  return encodedRedirect(
-    "success",
-    "/users/signup",
-    "Thank you for signing up for our app. An email confirmation has been sent to the email that you specified. Please view the email for further instructions."
-  );
+  return {
+    success:
+      "Thank you for signing up. Please check your email for further instructions.",
+  };
 }

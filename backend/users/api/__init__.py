@@ -15,3 +15,4 @@ from .logout import *
 from .refresh import *
 from .signup import *
 from .verify import *
+from .verify_access_token import *
