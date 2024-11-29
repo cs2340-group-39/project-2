@@ -1,5 +1,5 @@
 # ruff: noqa: F403
 
+from .blacklisted_token import *
 from .profile import *
-from .token_blacklist import *
 from .user import User as User

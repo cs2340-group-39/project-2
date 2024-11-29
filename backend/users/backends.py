@@ -4,10 +4,12 @@ from django.http import HttpRequest
 from jwt import (
   DecodeError,
   ExpiredSignatureError,
+  InvalidSignatureError,
   InvalidTokenError,
 )
 
 from .models import User
+from .utils import get_token_secret_key
 
 
 class TokenAuthenticationBackend(BaseBackend):
@@ -16,23 +18,38 @@ class TokenAuthenticationBackend(BaseBackend):
       return None
 
     try:
-      payload = jwt.decode(
-        token,
-        algorithms=["HS256"],
-        options={"verify_signature": False, "verify_exp": True},
-      )
+      try:
+        payload = jwt.decode(
+          token,
+          algorithms=["HS256"],
+          options={"verify_signature": False},
+        )
+      except DecodeError:
+        return None
 
-      uuid = payload["sub"]
-      user = User.objects.get(pk=uuid)
+      try:
+        uuid = payload["sub"]
+        user = User.objects.get(pk=uuid)
+      except (User.DoesNotExist, KeyError):
+        return None
+
+      try:
+        jwt.decode(
+          token,
+          get_token_secret_key(user),
+          algorithms=["HS256"],
+          options={"verify_signature": True},
+        )
+      except (
+        InvalidTokenError,
+        ExpiredSignatureError,
+        InvalidSignatureError,
+      ):
+        return None
 
       return user
-    except (
-      User.DoesNotExist,
-      InvalidTokenError,
-      ExpiredSignatureError,
-      DecodeError,
-      KeyError,
-    ):
+    except Exception as e:
+      print(f"Decoding the JWT failed unexpectedly: {str(e)}")
       return None
 
   def get_user(self, user_id):

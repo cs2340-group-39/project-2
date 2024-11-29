@@ -4,15 +4,13 @@ import { jwtVerify } from "jose";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { cookies } from "next/headers";
 
-const key = new TextEncoder().encode(process.env.SECRET_KEY);
-
 interface CookieConfig {
   name: string;
   duration: number;
   options: Partial<ResponseCookie>;
 }
 
-const COOKIE: CookieConfig = {
+const _cookie: CookieConfig = {
   name: "session",
   duration: 24 * 60 * 60 * 1000,
   options: {
@@ -22,8 +20,6 @@ const COOKIE: CookieConfig = {
     path: "/",
   },
 };
-
-export async function encrypt() {}
 
 export async function decrypt(session: string) {
   try {
@@ -36,30 +32,30 @@ export async function decrypt(session: string) {
   }
 }
 
-export async function createSession(accessToken: string) {
-  const expires = new Date(Date.now() + COOKIE.duration);
-  cookies().set(COOKIE.name, accessToken, {
-    ...COOKIE.options,
+export async function createSession(session: string) {
+  const expires = new Date(Date.now() + _cookie.duration);
+  cookies().set(_cookie.name, session, {
+    ..._cookie.options,
     expires,
   });
 }
 
 export async function verifySession() {
-  const cookie = cookies().get(COOKIE.name)?.value;
+  const cookie = cookies().get(_cookie.name)?.value;
 
   if (cookie) {
-    const accessToken = await decrypt(cookie);
+    const session = await decrypt(cookie);
 
-    if (!accessToken?.sub) {
+    if (!session?.sub) {
       return { isAuthenticated: false };
     }
 
-    return { isAuthenticated: true, uuid: accessToken.uuid };
+    return { isAuthenticated: true, uuid: session.uuid };
   } else {
     return { isAuthenticated: false };
   }
 }
 
 export async function deleteSession() {
-  cookies().delete(COOKIE.name);
+  cookies().delete(_cookie.name);
 }

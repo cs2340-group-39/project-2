@@ -65,6 +65,8 @@ class User(AbstractBaseUser, PermissionsMixin):
   )
   email_verified_at = models.DateTimeField(null=True, blank=True)
 
+  token_salt = models.UUIDField(default=_uuid.uuid4)
+
   USERNAME_FIELD = "email"
   REQUIRED_FIELDS = ["username"]
 

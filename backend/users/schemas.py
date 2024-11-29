@@ -23,3 +23,7 @@ class UserVerifyRequestSchema(Schema):
 
 class UserErrorResponseSchema(Schema):
   detail: str
+
+
+class TokenVerificationSchema(Schema):
+  verified: bool

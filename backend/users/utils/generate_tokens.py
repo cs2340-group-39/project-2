@@ -6,6 +6,10 @@ from django.conf import settings
 from django.utils import timezone
 
 
+def get_token_secret_key(user):
+  return f"{settings.SECRET_KEY}${str(user.token_salt)}"
+
+
 def generate_tokens(user):
   current_time = timezone.now()
 
@@ -17,7 +21,7 @@ def generate_tokens(user):
       "type": "access",
       "jti": str(uuid.uuid4()),
     },
-    settings.SECRET_KEY,
+    get_token_secret_key(user),
     algorithm="HS256",
   )
 
@@ -29,7 +33,7 @@ def generate_tokens(user):
       "type": "refresh",
       "jti": str(uuid.uuid4()),
     },
-    settings.SECRET_KEY,
+    get_token_secret_key(user),
     algorithm="HS256",
   )
 

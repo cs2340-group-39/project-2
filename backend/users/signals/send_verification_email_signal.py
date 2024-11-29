@@ -1,9 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from ..utils import (
-  send_verification_email as _send_verification_email,
-)
+from ..utils import send_verification_email as _send_verification_email
 from . import User
 
 

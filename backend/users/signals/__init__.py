@@ -6,4 +6,4 @@ User = get_user_model()
 
 
 from .create_profile import *
-from .send_verification_email import *
+from .send_verification_email_signal import *
