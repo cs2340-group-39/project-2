@@ -1,9 +1,6 @@
 import { type NextRequest } from "next/server";
-import { updateSession } from "./lib/session";
 
-export async function middleware(request: NextRequest) {
-  updateSession(request);
-}
+export async function middleware(request: NextRequest) {}
 
 export const config = {
   matcher: [
