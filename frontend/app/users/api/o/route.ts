@@ -41,15 +41,10 @@ export async function GET(request: Request) {
 
   const data = await response.json();
 
-  return NextResponse.json({
-    accessToken: data.access_token,
-    refreshToken: data.refresh_token,
-  });
-
-  // return NextResponse.redirect(
-  //   new URL(
-  //     "/users/api/callback?access_token=&refresh_token=",
-  //     process.env.NEXT_PUBLIC_BASE_URL
-  //   )
-  // );
+  return NextResponse.redirect(
+    new URL(
+      `/users/api/callback?access_token=${data.access_token}&refresh_token=${data.refresh_token}`,
+      process.env.NEXT_PUBLIC_BASE_URL
+    )
+  );
 }

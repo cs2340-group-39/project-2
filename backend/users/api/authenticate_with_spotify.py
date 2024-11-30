@@ -12,8 +12,9 @@ from ..schemas import (
   AuthenticateWithSpotifyRequestSchema,
   AuthenticateWithSpotifyResponseSchema,
   UserErrorResponseSchema,
-  UserSuccessResponseSchema,
+  UserResponseSchema,
 )
+from ..utils import generate_tokens
 from . import api
 
 
@@ -33,10 +34,7 @@ def authenticate_with_spotify(request: HttpRequest):
 
 @api.post(
   "link-user-with-spotify",
-  response={
-    400: UserErrorResponseSchema,
-    200: UserSuccessResponseSchema,
-  },
+  response={400: UserErrorResponseSchema, 200: UserResponseSchema},
   auth=TokenAuthenticator(),
 )
 def link_user_with_spotify(
@@ -107,6 +105,12 @@ def link_user_with_spotify(
   )
   profile.save()
 
-  return 200, UserSuccessResponseSchema(
-    detail="Successfully modified the user's profile."
+  access_token, refresh_token = generate_tokens(user)
+
+  return 200, UserResponseSchema(
+    uuid=str(user.uuid),
+    username=user.username,
+    email=user.email,
+    access_token=access_token,
+    refresh_token=refresh_token,
   )

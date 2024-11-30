@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -7,23 +9,26 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { WrappedSectionProps } from "../actions";
 
-export default function Page() {
-  const carouselsData = Array.from({ length: 3 });
-
+export function DashboardWrappedSection({
+  carouselsData,
+}: WrappedSectionProps) {
   return (
     <div className="space-y-8 px-4">
-
+      <div className="mt-4 flex justify-center">
+        <Button
+          variant="default"
+          size="default"
+          onClick={() => console.log("Create new wrap")}
+        >
+          Create New Wrap
+        </Button>
+      </div>
+      <Separator className="my-8" />
       {carouselsData.map((_, carouselIndex) => (
         <div key={carouselIndex} className="relative px-10">
-
-          <h2 className="text-lg font-semibold mb-2">
-            Posted by User @saada7553
-          </h2>
-
           <div className="relative flex items-center justify-center">
             <Carousel className="w-full max-w-sm">
               <CarouselContent className="-ml-1">
@@ -56,19 +61,19 @@ export default function Page() {
               variant="default"
               size="default"
               onClick={() =>
-                console.log(`Like Wrap ${carouselIndex + 1}`)
+                console.log(`Post this wrap ${carouselIndex + 1}`)
               }
             >
-              Like Wrap
+              Post this carousel
             </Button>
             <Button
-              variant="default"
+              variant="destructive"
               size="default"
               onClick={() =>
-                console.log(`Follow User ${carouselIndex + 1}`)
+                console.log(`Delete this carousel ${carouselIndex + 1}`)
               }
             >
-              Follow User
+              Delete
             </Button>
           </div>
           <Separator className="my-8" />

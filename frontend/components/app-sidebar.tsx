@@ -1,5 +1,5 @@
-import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
+import { GalleryVerticalEnd } from "lucide-react";
+import * as React from "react";
 
 import {
   Sidebar,
@@ -12,38 +12,39 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
-} from "@/components/ui/sidebar"
-import { title } from "process"
+} from "@/components/ui/sidebar";
 
 // This is sample data.
 const data = {
   navMain: [
     {
       title: "Select:",
-      url: "/dashboard2",
+      url: "/dashboard",
       items: [
         {
           title: "My Spotify Wrapped",
-          url: "/dashboard2",
+          url: "/dashboard",
         },
         {
           title: "Social",
-          url: "/social2",
+          url: "/social",
         },
         {
           title: "Settings",
           url: "#",
         },
         {
-          title: "About", 
-          url: "https://groupcs39.wixsite.com/atlanta-food-finder/team-4"
+          title: "About",
+          url: "https://groupcs39.wixsite.com/atlanta-food-finder/team-4",
         },
       ],
-    }
+    },
   ],
-}
+};
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
@@ -77,7 +78,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={item.isActive}>
+                        <SidebarMenuSubButton
+                          asChild
+                          // @ts-ignore
+                          isActive={item.isActive}
+                        >
                           <a href={item.url}>{item.title}</a>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
@@ -90,5 +95,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }

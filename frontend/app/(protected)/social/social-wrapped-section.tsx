@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -7,29 +9,19 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { WrappedSectionProps } from "../actions";
 
-export default function Page() {
-  const carouselsData = Array.from({ length: 3 });
-
+export function SocialWrappedSection({
+  carouselsData,
+}: WrappedSectionProps) {
   return (
     <div className="space-y-8 px-4">
-      <div className="mt-4 flex justify-center">
-        <Button
-          variant="default"
-          size="default"
-          onClick={() => console.log("Create new wrap")}
-        >
-          Create New Wrap
-        </Button>
-      </div>
-
-      <Separator className="my-8" />
-
       {carouselsData.map((_, carouselIndex) => (
         <div key={carouselIndex} className="relative px-10">
+          <h2 className="text-lg font-semibold mb-2">
+            Wrapped by @{carouselsData[carouselIndex].username}
+          </h2>
           <div className="relative flex items-center justify-center">
             <Carousel className="w-full max-w-sm">
               <CarouselContent className="-ml-1">
@@ -56,25 +48,24 @@ export default function Page() {
               <CarouselNext />
             </Carousel>
           </div>
-
           <div className="mt-4 flex justify-center gap-4">
             <Button
               variant="default"
               size="default"
               onClick={() =>
-                console.log(`Post this wrap ${carouselIndex + 1}`)
+                console.log(`Like Wrap ${carouselIndex + 1}`)
               }
             >
-              Post this carousel
+              Like Wrap
             </Button>
             <Button
-              variant="destructive"
+              variant="default"
               size="default"
               onClick={() =>
-                console.log(`Delete this carousel ${carouselIndex + 1}`)
+                console.log(`Follow User ${carouselIndex + 1}`)
               }
             >
-              Delete
+              Follow User
             </Button>
           </div>
           <Separator className="my-8" />

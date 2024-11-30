@@ -1,22 +1,17 @@
-import { decodeJwt } from "jose";
-import { cookies } from "next/headers";
+"use client";
 
-import { getIronSession } from "iron-session";
-
-import { SessionData, sessionOptions } from "@/lib/session";
+import { WrappedData } from "../actions";
+import { DashboardWrappedSection } from "./dashboard-wrapped-section";
 
 export default async function Page() {
-  const session = await getIronSession<SessionData>(
-    await cookies(),
-    sessionOptions
-  );
+  const carouselsData: WrappedData[] = [
+    {
+      username: "saada7553",
+    },
+    {
+      username: "arjun7553",
+    },
+  ];
 
-  return (
-    <>
-      <h1>Dashboard page</h1>
-      <pre className="text-xs font-mono p-3 rounded border overflow-auto">
-        {JSON.stringify(decodeJwt(session.accessToken!))}
-      </pre>
-    </>
-  );
+  return <DashboardWrappedSection carouselsData={carouselsData} />;
 }
