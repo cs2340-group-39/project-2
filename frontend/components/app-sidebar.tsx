@@ -13,25 +13,30 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { title } from "process"
 
 // This is sample data.
 const data = {
   navMain: [
     {
       title: "Select:",
-      url: "#",
+      url: "/dashboard",
       items: [
         {
           title: "My Spotify Wrapped",
-          url: "#",
+          url: "/dashboard",
         },
         {
           title: "Social",
-          url: "#",
+          url: "/social",
         },
         {
           title: "Settings",
           url: "#",
+        },
+        {
+          title: "About", 
+          url: "https://groupcs39.wixsite.com/atlanta-food-finder/team-4"
         },
       ],
     }
