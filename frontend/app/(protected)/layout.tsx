@@ -2,6 +2,8 @@ import { SessionData, sessionOptions } from "@/lib/session";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "@/components/app-sidebar"
 
 export default async function ProtectedLayout({
   children,
@@ -45,5 +47,13 @@ export default async function ProtectedLayout({
     redirect("/users/api/logout");
   }
 
-  return <>{children}</>;
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
+  );
 }
