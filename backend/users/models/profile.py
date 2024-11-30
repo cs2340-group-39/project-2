@@ -15,6 +15,6 @@ class Profile(models.Model):
   spotify_refresh_token = models.CharField(
     max_length=10000, blank=True, null=True
   )
-  spotify_access_token_expires_in = models.DateTimeField(
+  spotify_access_token_expires_at = models.DateTimeField(
     null=True, blank=True
   )

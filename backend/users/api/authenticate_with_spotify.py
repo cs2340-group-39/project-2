@@ -4,6 +4,7 @@ from datetime import timedelta
 import requests
 from django.conf import settings
 from django.http import HttpRequest
+from django.utils import timezone
 from requests.exceptions import RequestException
 
 from ..authenticators import TokenAuthenticator
@@ -11,6 +12,7 @@ from ..schemas import (
   AuthenticateWithSpotifyRequestSchema,
   AuthenticateWithSpotifyResponseSchema,
   UserErrorResponseSchema,
+  UserSuccessResponseSchema,
 )
 from . import api
 
@@ -31,7 +33,10 @@ def authenticate_with_spotify(request: HttpRequest):
 
 @api.post(
   "link-user-with-spotify",
-  response={400: UserErrorResponseSchema},
+  response={
+    400: UserErrorResponseSchema,
+    200: UserSuccessResponseSchema,
+  },
   auth=TokenAuthenticator(),
 )
 def link_user_with_spotify(
@@ -97,9 +102,11 @@ def link_user_with_spotify(
   profile.spotify_email = spotify_profile["email"]
   profile.spotify_access_token = spotify_data["access_token"]
   profile.spotify_refresh_token = spotify_data["refresh_token"]
-  profile.spotify_access_token_expires_in = timedelta(
+  profile.spotify_access_token_expires_at = timezone.now() + timedelta(
     seconds=spotify_data["expires_in"]
   )
   profile.save()
 
-  return 200, {"detail": "success"}
+  return 200, UserSuccessResponseSchema(
+    detail="Successfully modified the user's profile."
+  )

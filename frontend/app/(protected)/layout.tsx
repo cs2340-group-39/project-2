@@ -1,8 +1,3 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
 import { SessionData, sessionOptions } from "@/lib/session";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
@@ -36,7 +31,9 @@ export default async function ProtectedLayout({
     );
 
     if (!accessTokenVerificationResponse.ok) {
-      redirect("/users/api/logout");
+      console.log(
+        `Unexpected error verifying access token: ${accessTokenVerificationResponse.statusText}`
+      );
     }
 
     const accessTokenVerification =
@@ -55,36 +52,33 @@ export default async function ProtectedLayout({
     );
 
     if (!spotifyLinkVerificationResponse.ok) {
-      redirect("/users/link-with-spotify");
+      console.log(
+        `Unexpected error verifying spotify link: ${spotifyLinkVerificationResponse.statusText}`
+      );
     }
 
     const spotifyLinkVerification =
       await spotifyLinkVerificationResponse.json();
 
-    session.accessTokenVerified = accessTokenVerification.verified;
-    session.isLinkedWithSpotify = spotifyLinkVerification.verified;
-    session.save();
+    // session.accessTokenVerified = accessTokenVerification.verified;
+    // session.isLinkedWithSpotify = spotifyLinkVerification.verified;
+    // session.save();
 
     return {
-      verified:
-        accessTokenVerification.verified &&
-        spotifyLinkVerification.verified,
+      accessTokenVerified: accessTokenVerification.verified,
+      spotifyLinkVerified: spotifyLinkVerification.verified,
     };
   }
 
   const data = await verifyTokenAction();
 
-  if (!data.verified) {
+  if (!data.accessTokenVerified) {
     redirect("/users/api/logout");
   }
 
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
-  );
+  if (!data.spotifyLinkVerified) {
+    redirect("/users/link-with-spotify");
+  }
+
+  return <>{children}</>;
 }

@@ -25,6 +25,10 @@ class UserErrorResponseSchema(Schema):
   detail: str
 
 
+class UserSuccessResponseSchema(Schema):
+  detail: str
+
+
 class TokenVerificationRequestSchema(Schema):
   access_token: str
 

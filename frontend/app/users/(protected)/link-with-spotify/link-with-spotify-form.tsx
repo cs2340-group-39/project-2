@@ -9,7 +9,7 @@ import {
 
 import { authenticateWithSpotifyAction } from "./actions";
 
-export function LoginForm() {
+export function LinkWithSpotifyForm() {
   return (
     <Card className="w-[400px] mx-auto">
       <CardHeader>

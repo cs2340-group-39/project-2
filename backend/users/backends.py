@@ -76,12 +76,11 @@ class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
       if (
         profile.spotify_access_token
         and profile.spotify_refresh_token
-        and profile.spotify_access_token_expires_in
+        and profile.spotify_access_token_expires_at
       ):
         if (
-          timezone.now() - profile.spotify_access_token_expires_in
-          < timedelta(minutes=10).total_seconds()
-        ):
+          profile.spotify_access_token_expires_at - timezone.now()
+        ) < timedelta(minutes=10):
           try:
             response = requests.post(
               "https://accounts.spotify.com/api/token",
@@ -114,8 +113,8 @@ class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
 
             profile.spotify_access_token = data["access_token"]
             profile.spotify_refresh_token = data["refresh_token"]
-            profile.spotify_access_token_expires_in = timedelta(
-              seconds=data["expires_in"]
+            profile.spotify_access_token_expires_at = (
+              timezone.now() + timedelta(seconds=data["expires_in"])
             )
             profile.save()
           except RequestException as e:
