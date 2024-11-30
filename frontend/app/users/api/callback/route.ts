@@ -1,6 +1,6 @@
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 import { SessionData, sessionOptions } from "@/lib/session";
 
@@ -17,7 +17,9 @@ export async function GET(request: Request) {
   session.accessToken = accessToken;
   session.refreshToken = refreshToken;
   session.accessTokenVerified = true;
-  session.save();
+  await session.save();
 
-  return redirect("/dashboard");
+  return NextResponse.redirect(
+    new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL)
+  );
 }
