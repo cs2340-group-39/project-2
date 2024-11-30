@@ -23,21 +23,21 @@ class Migration(migrations.Migration):
         )
       ],
     ),
-    # migrations.AddField(
-    #     model_name="user",
-    #     name="email_verification_code",
-    #     field=models.UUIDField(blank=True, null=True),
-    # ),
-    # migrations.AddField(
-    #     model_name="user",
-    #     name="email_verification_code_created_at",
-    #     field=models.DateTimeField(blank=True, null=True),
-    # ),
-    # migrations.AddField(
-    #     model_name="user",
-    #     name="email_verified_at",
-    #     field=models.DateTimeField(blank=True, null=True),
-    # ),
+    migrations.AddField(
+      model_name="user",
+      name="email_verification_code",
+      field=models.UUIDField(blank=True, null=True),
+    ),
+    migrations.AddField(
+      model_name="user",
+      name="email_verification_code_created_at",
+      field=models.DateTimeField(blank=True, null=True),
+    ),
+    migrations.AddField(
+      model_name="user",
+      name="email_verified_at",
+      field=models.DateTimeField(blank=True, null=True),
+    ),
     migrations.AddField(
       model_name="user",
       name="token_salt",

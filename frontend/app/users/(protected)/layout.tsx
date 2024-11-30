@@ -35,8 +35,6 @@ export default async function ProtectedLayout({
     }
 
     return await response.json();
-
-    // TODO: Need extra route for verifying link with spotify
   }
 
   const data = await verifyTokenAction();

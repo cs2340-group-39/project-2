@@ -40,3 +40,8 @@ class RefreshSchema(Schema):
 
 class AuthenticateWithSpotifyResponseSchema(Schema):
   spotify_auth_url: str
+
+
+class AuthenticateWithSpotifyRequestSchema(Schema):
+  code: str
+  state: Optional[str] = None

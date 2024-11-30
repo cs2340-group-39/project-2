@@ -6,12 +6,14 @@ export interface SessionData {
   accessToken: string | null;
   refreshToken: string | null;
   accessTokenVerified: boolean;
+  isLinkedWithSpotify: boolean;
 }
 
 export const defaultSession: SessionData = {
   accessToken: null,
   refreshToken: null,
   accessTokenVerified: false,
+  isLinkedWithSpotify: false,
 };
 
 export const sessionOptions: SessionOptions = {

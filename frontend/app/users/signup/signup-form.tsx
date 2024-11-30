@@ -100,13 +100,6 @@ export function SignupForm() {
               Signup
             </Button>
           </Form>
-          <Button
-            variant="outline"
-            className="w-full"
-            onClick={() => {}}
-          >
-            Signup or Login with Spotify
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Already have an account?{" "}

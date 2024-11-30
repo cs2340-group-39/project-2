@@ -78,14 +78,6 @@ export function LoginForm() {
               Login
             </Button>
           </Form>
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={() => {}}
-          >
-            Signup or Login with Spotify
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
