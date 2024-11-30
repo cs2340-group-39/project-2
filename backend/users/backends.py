@@ -1,6 +1,11 @@
+from datetime import timedelta
+
 import jwt
+import requests
+from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
 from django.http import HttpRequest
+from django.utils import timezone
 from jwt import (
   DecodeError,
   ExpiredSignatureError,
@@ -8,6 +13,7 @@ from jwt import (
   InvalidSignatureError,
   InvalidTokenError,
 )
+from requests.exceptions import RequestException
 
 from .models import User
 from .utils import get_token_secret_key
@@ -59,3 +65,63 @@ class TokenAuthenticationBackend(BaseBackend):
       return User.objects.get(pk=user_id)
     except User.DoesNotExist:
       return None
+
+
+class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
+  def authenticate(self, request: HttpRequest, token=None):
+    user = super().authenticate(request, token)
+
+    if user:
+      profile = user.profile_for_user
+      if (
+        profile.spotify_access_token
+        and profile.spotify_refresh_token
+        and profile.spotify_access_token_expires_in
+      ):
+        if (
+          timezone.now() - profile.spotify_access_token_expires_in
+          < timedelta(minutes=10).total_seconds()
+        ):
+          try:
+            response = requests.post(
+              "https://accounts.spotify.com/api/token",
+              headers={
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              data={
+                "grant_type": "refresh_token",
+                "refresh_token": profile.spotify_refresh_token,
+                "client_id": settings.SPOTIFY_CLIENT_ID,
+              },
+            )
+
+            response.raise_for_status()
+
+            data = response.json()
+            if not all(
+              key in data
+              for key in [
+                "access_token",
+                "token_type",
+                "scope",
+                "expires_in",
+                "refresh_token",
+              ]
+            ):
+              raise ValueError(
+                "Spotify API error: Missing required fields in Spotify response."
+              )
+
+            profile.spotify_access_token = data["access_token"]
+            profile.spotify_refresh_token = data["refresh_token"]
+            profile.spotify_access_token_expires_in = timedelta(
+              seconds=data["expires_in"]
+            )
+            profile.save()
+          except RequestException as e:
+            print(f"Unexpected error refreshing spotify tokens: {e}")
+            return None
+
+        return user
+
+    return None
