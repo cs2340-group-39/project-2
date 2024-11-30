@@ -9,6 +9,7 @@ api = NinjaAPI(
   urls_namespace="users:api", docs=Swagger(), docs_url="/docs/"
 )
 
+from .authenticate_with_spotify import *
 from .delete import *
 from .login import *
 from .logout import *

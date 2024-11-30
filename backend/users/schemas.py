@@ -36,3 +36,7 @@ class TokenVerificationResponseSchema(Schema):
 class RefreshSchema(Schema):
   refresh_token: str
   access_token: Optional[str] = None
+
+
+class AuthenticateWithSpotifyResponseSchema(Schema):
+  spotify_auth_url: str

@@ -20,4 +20,5 @@ from .internationalization import *
 from .password import *
 from .public import *
 from .site import *
+from .spotify import *
 from .startup import *
