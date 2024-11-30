@@ -20,15 +20,15 @@ const data = {
   navMain: [
     {
       title: "Select:",
-      url: "/dashboard",
+      url: "/dashboard2",
       items: [
         {
           title: "My Spotify Wrapped",
-          url: "/dashboard",
+          url: "/dashboard2",
         },
         {
           title: "Social",
-          url: "/social",
+          url: "/social2",
         },
         {
           title: "Settings",
