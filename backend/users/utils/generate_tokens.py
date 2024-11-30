@@ -1,5 +1,4 @@
 import uuid
-from datetime import timedelta
 
 import jwt
 from django.conf import settings
@@ -17,7 +16,9 @@ def generate_tokens(user):
     {
       "sub": str(user.uuid),
       "iat": int(current_time.timestamp()),
-      "exp": int((current_time + timedelta(minutes=15)).timestamp()),
+      "exp": int(
+        (current_time + settings.AUTH_ACCESS_TOKEN_TIMEOUT).timestamp()
+      ),
       "type": "access",
       "jti": str(uuid.uuid4()),
     },
@@ -29,7 +30,9 @@ def generate_tokens(user):
     {
       "sub": str(user.uuid),
       "iat": int(current_time.timestamp()),
-      "exp": int((current_time + timedelta(days=7)).timestamp()),
+      "exp": int(
+        (current_time + settings.AUTH_REFRESH_TOKEN_TIMEOUT).timestamp()
+      ),
       "type": "refresh",
       "jti": str(uuid.uuid4()),
     },
