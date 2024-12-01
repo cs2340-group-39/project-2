@@ -12,7 +12,6 @@ INSTALLED_APPS = [
   "dummy.apps.DummyConfig",
   "users.apps.UsersConfig",
   "wrapped.apps.WrappedConfig",
-  "social.apps.SocialConfig",
 ]
 
 MIDDLEWARE = [

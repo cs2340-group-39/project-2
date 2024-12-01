@@ -31,8 +31,6 @@ export async function GET(request: Request) {
     }
   );
 
-  console.log(response.statusText);
-
   if (!response.ok) {
     return NextResponse.json({
       error: "There was an error.",

@@ -1,14 +1,17 @@
 from django.http import HttpRequest
 
 from ..authenticators import TokenAuthenticator
-from ..schemas import UserErrorResponseSchema, UserResponseSchema
 from . import api
 
 
-@api.delete(
-  "delete",
-  response={201: UserResponseSchema, 400: UserErrorResponseSchema},
-  auth=TokenAuthenticator(),
-)
+@api.delete("delete", auth=TokenAuthenticator())
 def delete(request: HttpRequest):
-  pass
+  user = request.auth
+
+  try:
+    user.delete()
+  except Exception as e:
+    print(f"Unexpected error deleting `User` object: {e}")
+    return 500
+
+  return 200

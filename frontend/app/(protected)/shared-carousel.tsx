@@ -67,9 +67,7 @@ export function DashboardCarousel({
     >
       <CarouselContent className="-ml-1 flex">
         {carouselItems.map((section, sectionIndex) => (
-          <CarouselItem key={sectionIndex} className="">
-            {" "}
-            {/* pl-1 md:basis-1/2 lg:basis-1/3 */}
+          <CarouselItem key={`section-${sectionIndex}`} className="">
             <div className="p-1">
               <Card className="w-full h-full">
                 <CardContent className="flex aspect-square items-center justify-center p-6">
@@ -79,17 +77,19 @@ export function DashboardCarousel({
                     </h3>
                     <div className="text-center">
                       {section.items.map((item, itemIndex) => (
-                        <>
-                          <div key={itemIndex}>
-                            {itemIndex === 2 ? (
-                              <img className="p-4" src={item} />
-                            ) : (
-                              <p className="text-pretty sm:text-lg">
-                                {item}
-                              </p>
-                            )}
-                          </div>
-                        </>
+                        <div key={`item-${sectionIndex}-${itemIndex}`}>
+                          {itemIndex === 2 ? (
+                            <img
+                              className="p-4"
+                              src={item}
+                              alt={`${section.title} image`}
+                            />
+                          ) : (
+                            <p className="text-pretty sm:text-lg">
+                              {item}
+                            </p>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </div>

@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarHeader,
   SidebarMenu,
@@ -13,6 +14,10 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import { SessionData, sessionOptions } from "@/lib/session";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { NavUser } from "./nav-user";
 
 // This is sample data.
 const data = {
@@ -30,10 +35,6 @@ const data = {
           url: "/social",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-        {
           title: "About",
           url: "https://groupcs39.wixsite.com/atlanta-food-finder/team-4",
         },
@@ -42,9 +43,32 @@ const data = {
   ],
 };
 
-export function AppSidebar({
+export async function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
+  const session = await getIronSession<SessionData>(
+    await cookies(),
+    sessionOptions
+  );
+
+  const response = await fetch(
+    "http://backend:8000/private/users/api/get-user",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    console.log("lil bruh could not be fetched :(");
+  }
+
+  const userData = await response.json();
+
   return (
     <Sidebar variant="floating" {...props}>
       <SidebarHeader>
@@ -94,6 +118,14 @@ export function AppSidebar({
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser
+          user={{
+            name: userData.username ?? "",
+            email: userData.email ?? "",
+          }}
+        />
+      </SidebarFooter>
     </Sidebar>
   );
 }

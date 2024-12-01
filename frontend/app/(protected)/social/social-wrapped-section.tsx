@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { WrappedSectionProps } from "../definitions";
 import { DashboardCarousel } from "../shared-carousel";
@@ -17,26 +16,6 @@ export function SocialWrappedSection({
           </h2>
           <div className="relative flex items-center justify-center">
             <DashboardCarousel wrappedData={wrappedData} />
-          </div>
-          <div className="mt-4 flex justify-center gap-4">
-            <Button
-              variant="default"
-              size="default"
-              onClick={() =>
-                console.log(`Like Wrap ${carouselIndex + 1}`)
-              }
-            >
-              Like Wrap
-            </Button>
-            <Button
-              variant="default"
-              size="default"
-              onClick={() =>
-                console.log(`Follow User ${carouselIndex + 1}`)
-              }
-            >
-              Follow User
-            </Button>
           </div>
           <Separator className="my-8" />
         </div>

@@ -3,9 +3,12 @@ from typing import List
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from ninja import NinjaAPI, Swagger
-from users.authenticators import SpotifyLinkedTokenAuthenticator
+from users.authenticators import (
+  SpotifyLinkedTokenAuthenticator,
+  TokenAuthenticator,
+)
 
-from .api_schemas import WrappedResponseSchema
+from .api_schemas import WrappedRequestSchema, WrappedResponseSchema
 from .db_schemas import ArtistSchema, TrackSchema
 from .models import Wrapped
 from .utils import call_spotify
@@ -77,15 +80,47 @@ def create_wrapped_data(request: HttpRequest):
     )
     tracks.append(track_object)
 
-  Wrapped.objects.create(
+  new = Wrapped.objects.create(
     profile=user.profile_for_user,
     artists=[artist.model_dump() for artist in artists],
     tracks=[track.model_dump() for track in tracks],
   )
 
   return 201, WrappedResponseSchema(
-    username=user.username, artists=artists, tracks=tracks
+    id=new.id, username=user.username, artists=artists, tracks=tracks
   )
+
+
+@api.delete("delete-wrapped-data", auth=TokenAuthenticator())
+def delete_wrapped_data(
+  request: HttpRequest, data: WrappedRequestSchema
+):
+  user = request.auth
+
+  try:
+    wrapped_objects = user.profile_for_user.wrapped_for_profile.all()
+    wrapped_objects.filter(pk=data.wrapped_id).delete()
+  except Exception as e:
+    print(f"Unexpected error deleting `Wrapped` object: {e}")
+    return 500
+
+  return 200
+
+
+@api.post("make-wrapped-data-public", auth=TokenAuthenticator())
+def make_wrapped_data_public(
+  request: HttpRequest, data: WrappedRequestSchema
+):
+  user = request.auth
+
+  try:
+    wrapped_objects = user.profile_for_user.wrapped_for_profile.all()
+    wrapped_objects.filter(pk=data.wrapped_id).update(public=True)
+  except Exception as e:
+    print(f"Unexpected error updating `Wrapped` object: {e}")
+    return 500
+
+  return 200
 
 
 @api.get(
@@ -102,7 +137,10 @@ def get_wrapped_data_for_current_user(request: HttpRequest):
   return 200, {
     "items": [
       WrappedResponseSchema(
-        username=user.username, artists=item.artists, tracks=item.tracks
+        id=item.id,
+        username=user.username,
+        artists=item.artists,
+        tracks=item.tracks,
       ).model_dump()
       for item in wrapped_objects
     ]
@@ -116,6 +154,7 @@ def get_public_wrapped_data(request: HttpRequest):
   return 200, {
     "items": [
       WrappedResponseSchema(
+        id=item.id,
         username=item.profile.user.username,
         artists=item.artists,
         tracks=item.tracks,

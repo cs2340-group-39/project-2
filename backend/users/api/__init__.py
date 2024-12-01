@@ -11,6 +11,7 @@ api = NinjaAPI(
 
 from .authenticate_with_spotify import *
 from .delete import *
+from .get import *
 from .login import *
 from .logout import *
 from .refresh import *

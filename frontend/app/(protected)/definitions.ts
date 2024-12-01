@@ -1,4 +1,5 @@
 export interface WrappedData {
+  id: number;
   username: string;
   artists: Artist[];
   tracks: Track[];
