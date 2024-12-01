@@ -8,10 +8,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { WrappedData } from "../actions";
+import { WrappedData } from "./actions";
 
-export function DashboardCarousel({ wrappedData }: { wrappedData: WrappedData }) {
-    console.log(wrappedData);
+export function DashboardCarousel({
+  wrappedData,
+}: {
+  wrappedData: WrappedData;
+}) {
+  console.log(wrappedData);
 
   const carouselItems = [
     {
@@ -29,12 +33,12 @@ export function DashboardCarousel({ wrappedData }: { wrappedData: WrappedData })
     {
       title: "Top Genres",
       items: wrappedData.topGenres,
-    }
+    },
   ];
   console.log(carouselItems);
 
   return (
-    <Carousel 
+    <Carousel
       className="w-full max-w-full p-10"
       opts={{
         align: "start",
@@ -55,8 +59,8 @@ export function DashboardCarousel({ wrappedData }: { wrappedData: WrappedData })
                   </h3>
                   <div className="text-center">
                     {section.items.map((item, itemIndex) => (
-                      <p 
-                        key={itemIndex} 
+                      <p
+                        key={itemIndex}
                         className="text-base sm:text-lg"
                       >
                         {item}

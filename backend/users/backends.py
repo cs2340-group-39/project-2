@@ -68,8 +68,10 @@ class TokenAuthenticationBackend(BaseBackend):
 
 
 class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
-  def authenticate(self, request: HttpRequest, token=None):
-    user = super().authenticate(request, token)
+  def authenticate(
+    self, request: HttpRequest, token_of_spotify_linked_user=None
+  ):
+    user = super().authenticate(request, token_of_spotify_linked_user)
 
     if user:
       profile = user.profile_for_user

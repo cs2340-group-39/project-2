@@ -35,7 +35,7 @@ def verify_link_with_spotify(
   request: HttpRequest, data: TokenVerificationRequestSchema
 ):
   user = SpotifyLinkedAuthenticationBackend().authenticate(
-    request=request, token=data.access_token
+    request=request, token_of_spotify_linked_user=data.access_token
   )
 
   if user is None:

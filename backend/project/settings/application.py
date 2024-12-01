@@ -13,7 +13,6 @@ INSTALLED_APPS = [
   "users.apps.UsersConfig",
   "wrapped.apps.WrappedConfig",
   "social.apps.SocialConfig",
-  "games.apps.GamesConfig",
 ]
 
 MIDDLEWARE = [
