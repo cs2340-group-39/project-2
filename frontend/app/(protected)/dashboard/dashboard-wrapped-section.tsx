@@ -47,7 +47,6 @@ export function DashboardWrappedSection({
       {createWrappedState?.success && (
         <p>{createWrappedState.success}</p>
       )}
-
       {deleteWrappedState?.errors?.ambiguous && (
         <p className="text-red-500">
           {deleteWrappedState.errors.ambiguous}
@@ -56,21 +55,18 @@ export function DashboardWrappedSection({
       {deleteWrappedState?.success && (
         <p>{deleteWrappedState.success}</p>
       )}
-
       {postWrappedState?.errors?.ambiguous && (
         <p className="text-red-500">
           {postWrappedState.errors.ambiguous}
         </p>
       )}
       {postWrappedState?.success && <p>{postWrappedState.success}</p>}
-
       <Separator className="my-4 sm:my-8" />
       {carouselsData.map((wrappedData, carouselIndex) => (
         <div key={carouselIndex} className="relative px-2 sm:px-10">
           <div className="relative flex items-center justify-center">
             <DashboardCarousel wrappedData={wrappedData} />
           </div>
-
           <div className="mt-2 sm:mt-4 flex justify-center gap-2 sm:gap-4">
             <Form action={postWrappedDispatch}>
               <input type="hidden" name="id" value={wrappedData.id} />
@@ -83,7 +79,6 @@ export function DashboardWrappedSection({
                 Post this wrap
               </Button>
             </Form>
-
             <Form action={deleteWrappedDispatch}>
               <input type="hidden" name="id" value={wrappedData.id} />
               <Button
