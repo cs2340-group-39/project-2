@@ -1,18 +1,18 @@
 services:
-  frontend:
-    container_name: wrapped_frontend
-    image: asheshadri2005/wrapped:frontend
-    restart: always
-    environment:
-      - a=b
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
+    frontend:
+        container_name: wrapped_frontend
+        image: asheshadri2005/wrapped:frontend
+        restart: always
+        environment:
+            - a=b
+        ports:
+            - "3000:3000"
+        depends_on:
+            - backend
 
-  backend:
-    container_name: wrapped_backend
-    image: asheshadri2005/wrapped:backend
-    restart: always
-    environment:
-      - SECRET_KEY=django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct
+    backend:
+        container_name: wrapped_backend
+        image: asheshadri2005/wrapped:backend
+        restart: always
+        environment:
+            - SECRET_KEY=django-insecure-71egvc!bqkur)ftmxfexk+na*^*+u5c&k6g7=dbq)yvdy9_)ct

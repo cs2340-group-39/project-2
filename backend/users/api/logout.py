@@ -6,9 +6,9 @@ from . import api
 
 
 @api.get(
-  "logout",
-  response={200: UserResponseSchema, 400: UserErrorResponseSchema},
-  auth=TokenAuthenticator(),
+    "logout",
+    response={200: UserResponseSchema, 400: UserErrorResponseSchema},
+    auth=TokenAuthenticator(),
 )
 def logout(request: HttpRequest):
-  pass
+    pass

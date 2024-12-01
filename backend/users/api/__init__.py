@@ -5,9 +5,7 @@ from ninja import NinjaAPI, Swagger
 
 User = get_user_model()
 
-api = NinjaAPI(
-  urls_namespace="users:api", docs=Swagger(), docs_url="/docs/"
-)
+api = NinjaAPI(urls_namespace="users:api", docs=Swagger(), docs_url="/docs/")
 
 from .authenticate_with_spotify import *
 from .delete import *

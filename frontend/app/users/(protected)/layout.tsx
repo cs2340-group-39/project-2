@@ -4,44 +4,41 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  async function verifyTokenAction() {
-    "use server";
+    async function verifyTokenAction() {
+        "use server";
 
-    const session = await getIronSession<SessionData>(
-      await cookies(),
-      sessionOptions
-    );
+        const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
 
-    const access_token = session.accessToken;
+        const access_token = session.accessToken;
 
-    const response = await fetch(
-      "http://backend:8000/private/users/api/verify-access-token",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ access_token }),
-        cache: "no-store",
-      }
-    );
+        const response = await fetch(
+            "http://backend:8000/private/users/api/verify-access-token",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ access_token }),
+                cache: "no-store",
+            }
+        );
 
-    if (!response.ok) {
-      redirect("/users/api/logout");
+        if (!response.ok) {
+            redirect("/users/api/logout");
+        }
+
+        return await response.json();
     }
 
-    return await response.json();
-  }
+    const data = await verifyTokenAction();
 
-  const data = await verifyTokenAction();
+    if (!data.verified) {
+        redirect("/users/api/logout");
+    }
 
-  if (!data.verified) {
-    redirect("/users/api/logout");
-  }
-
-  return <>{children}</>;
+    return <>{children}</>;
 }
