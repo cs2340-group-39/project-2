@@ -16,6 +16,8 @@ class PydanticJSONField(models.JSONField):
     super().__init__(*args, **kwargs)
 
   def validate(self, value: Any, model_instance) -> None:
+    if isinstance(value, self.pydantic_model):
+      value = value.model_dump()
     super().validate(value, model_instance)
     try:
       self.pydantic_model(**value)
@@ -25,6 +27,8 @@ class PydanticJSONField(models.JSONField):
   def pre_save(self, model_instance, add):
     value = getattr(model_instance, self.attname)
     if value:
+      if isinstance(value, self.pydantic_model):
+        value = value.model_dump()
       try:
         validated = self.pydantic_model(**value)
         value = validated.model_dump()
@@ -37,7 +41,8 @@ class PydanticJSONField(models.JSONField):
     value = super().to_python(value)
     if value is not None:
       try:
-        return self.pydantic_model(**value)
+        validated = self.pydantic_model(**value)
+        return validated.model_dump()
       except Exception as e:
         raise ValidationError(f"Invalid data format: {str(e)}")
     return value
@@ -46,7 +51,15 @@ class PydanticJSONField(models.JSONField):
     value = super().from_db_value(value, expression, connection)
     if value is not None:
       try:
-        return self.pydantic_model(**value)
+        validated = self.pydantic_model(**value)
+        return validated.model_dump()
       except Exception as e:
         raise ValidationError(f"Invalid data format: {str(e)}")
     return value
+
+  def get_prep_value(self, value):
+    if value is None:
+      return value
+    if isinstance(value, self.pydantic_model):
+      value = value.model_dump()
+    return super().get_prep_value(value)

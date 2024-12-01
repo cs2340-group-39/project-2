@@ -1,7 +1,7 @@
 import requests
 
 
-def call_spotify_artist(
+def call_spotify(
   user, query: str, time_range: str, limit: int, offset: int
 ):
   url = (
@@ -20,7 +20,3 @@ def call_spotify_artist(
   response.raise_for_status()
 
   return response.json()
-
-def call_spotify_album(
-    user, query: str, time_range: str, limit: int, offset: int
-)

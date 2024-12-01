@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { WrappedSectionProps } from "../actions";
+import { WrappedSectionProps } from "../definitions";
 import { DashboardCarousel } from "../shared-carousel";
 
 export function SocialWrappedSection({

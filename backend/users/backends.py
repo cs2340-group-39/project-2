@@ -1,3 +1,4 @@
+import base64
 from datetime import timedelta
 
 import jwt
@@ -84,10 +85,15 @@ class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
           profile.spotify_access_token_expires_at - timezone.now()
         ) < timedelta(minutes=10):
           try:
+            credentials = base64.b64encode(
+              f"{settings.SPOTIFY_CLIENT_ID}:{settings.SPOTIFY_CLIENT_SECRET}".encode()
+            ).decode()
+
             response = requests.post(
               "https://accounts.spotify.com/api/token",
               headers={
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": f"Basic {credentials}",
               },
               data={
                 "grant_type": "refresh_token",
@@ -99,22 +105,10 @@ class SpotifyLinkedAuthenticationBackend(TokenAuthenticationBackend):
             response.raise_for_status()
 
             data = response.json()
-            if not all(
-              key in data
-              for key in [
-                "access_token",
-                "token_type",
-                "scope",
-                "expires_in",
-                "refresh_token",
-              ]
-            ):
-              raise ValueError(
-                "Spotify API error: Missing required fields in Spotify response."
-              )
 
             profile.spotify_access_token = data["access_token"]
-            profile.spotify_refresh_token = data["refresh_token"]
+            if data.get("refresh_token"):
+              profile.spotify_refresh_token = data["refresh_token"]
             profile.spotify_access_token_expires_at = (
               timezone.now() + timedelta(seconds=data["expires_in"])
             )

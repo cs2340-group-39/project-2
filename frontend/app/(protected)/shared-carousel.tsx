@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -8,38 +6,60 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { WrappedData } from "./actions";
+import { WrappedData } from "./definitions";
+
+interface CarouselItem {
+  title: string;
+  items: string[];
+}
 
 export function DashboardCarousel({
   wrappedData,
 }: {
   wrappedData: WrappedData;
 }) {
-  console.log(wrappedData);
-
-  const carouselItems = [
+  let carouselItems: CarouselItem[] = [
     {
       title: "Top Artists",
-      items: wrappedData.topArtists,
-    },
-    {
-      title: "Top Albums",
-      items: wrappedData.topAlbums,
-    },
-    {
-      title: "Top Genres",
-      items: wrappedData.topGenres,
-    },
-    {
-      title: "Top Genres",
-      items: wrappedData.topGenres,
+      items: [],
     },
   ];
-  console.log(carouselItems);
+
+  for (let i = 0; i < wrappedData.artists.length; i++) {
+    let artist = wrappedData.artists[i];
+
+    const newArtistSlide: CarouselItem = {
+      title: `Artist #${i + 1}`,
+      items: [artist.name, "", artist.photo_url],
+    };
+
+    carouselItems.push(newArtistSlide);
+  }
+
+  const trackCoverSlide: CarouselItem = {
+    title: "Top Tracks",
+    items: [],
+  };
+  carouselItems.push(trackCoverSlide);
+
+  for (let i = 0; i < wrappedData.tracks.length; i++) {
+    let track = wrappedData.tracks[i];
+
+    const newArtistSlide: CarouselItem = {
+      title: `Track #${i + 1}`,
+      items: [
+        track.track_name,
+        track.artist_name,
+        track.track_cover_url,
+      ],
+    };
+
+    carouselItems.push(newArtistSlide);
+  }
 
   return (
     <Carousel
-      className="w-full max-w-full p-10"
+      className="w-full max-w-xs"
       opts={{
         align: "start",
         slidesToScroll: 1,
@@ -47,25 +67,31 @@ export function DashboardCarousel({
     >
       <CarouselContent className="-ml-1 flex">
         {carouselItems.map((section, sectionIndex) => (
-          <CarouselItem
-            key={sectionIndex}
-            className="pl-1 md:basis-1/2 lg:basis-1/3"
-          >
+          <CarouselItem key={sectionIndex} className="">
+            {" "}
+            {/* pl-1 md:basis-1/2 lg:basis-1/3 */}
             <div className="p-1">
-              <Card className="h-full">
-                <CardContent className="flex flex-col aspect-square items-center justify-center p-2 sm:p-6 space-y-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-center">
-                    {section.title}
-                  </h3>
-                  <div className="text-center">
-                    {section.items.map((item, itemIndex) => (
-                      <p
-                        key={itemIndex}
-                        className="text-base sm:text-lg"
-                      >
-                        {item}
-                      </p>
-                    ))}
+              <Card className="w-full h-full">
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <div className="flex flex-col">
+                    <h3 className="text-lg sm:text-xl font-bold text-center">
+                      {section.title}
+                    </h3>
+                    <div className="text-center">
+                      {section.items.map((item, itemIndex) => (
+                        <>
+                          <div key={itemIndex}>
+                            {itemIndex === 2 ? (
+                              <img className="p-4" src={item} />
+                            ) : (
+                              <p className="text-pretty sm:text-lg">
+                                {item}
+                              </p>
+                            )}
+                          </div>
+                        </>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>

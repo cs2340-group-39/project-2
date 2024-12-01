@@ -16,26 +16,16 @@ LLM Summary
 - Description - text
 """
 
-from datetime import timedelta
-from typing import List
-
 from pydantic import BaseModel
 
 
 class ArtistSchema(BaseModel):
   name: str
   photo_url: str
-  top_song: str
-  time_listened: timedelta
 
 
-class AlbumSchema(BaseModel):
-  name: str
-  album_cover_url: str
-  song_names: List[str]
-
-
-class GenreSchema(BaseModel):
-  fav_song: str
-  num_listened: int
-  image_url: str
+class TrackSchema(BaseModel):
+  track_name: str
+  track_cover_url: str
+  artist_name: str
+  track_type: str

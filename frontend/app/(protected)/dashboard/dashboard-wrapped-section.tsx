@@ -2,23 +2,38 @@
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { WrappedSectionProps } from "../actions";
+import { useActionState } from "react";
+import { WrappedSectionProps } from "../definitions";
 import { DashboardCarousel } from "../shared-carousel";
+import { createWrappedDataAction } from "./actions";
 
 export function DashboardWrappedSection({
   carouselsData,
 }: WrappedSectionProps) {
+  const [createWrappedState, createWrappedDispatch] = useActionState(
+    createWrappedDataAction,
+    undefined
+  );
+
   return (
     <div className="space-y-4 px-2 sm:px-4">
       <div className="mt-4 flex justify-center">
         <Button
           variant="default"
           size="default"
-          onClick={() => console.log("Create new wrap")}
+          onClick={createWrappedDispatch}
         >
           Create New Wrap
         </Button>
       </div>
+      {createWrappedState?.errors?.ambiguous && (
+        <p className="text-red-500">
+          {createWrappedState.errors.ambiguous}
+        </p>
+      )}
+      {createWrappedState?.success && (
+        <p>{createWrappedState.success}</p>
+      )}
       <Separator className="my-4 sm:my-8" />
       {carouselsData.map((wrappedData, carouselIndex) => (
         <div key={carouselIndex} className="relative px-2 sm:px-10">
@@ -35,7 +50,7 @@ export function DashboardWrappedSection({
                 console.log(`Post this wrap ${carouselIndex + 1}`)
               }
             >
-              Post this carousel
+              Post this wrap
             </Button>
             <Button
               variant="destructive"

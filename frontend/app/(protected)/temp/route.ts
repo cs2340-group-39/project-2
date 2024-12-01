@@ -19,5 +19,7 @@ export async function GET(request: NextRequest) {
     }
   );
 
-  return NextResponse.json({ ...response.json() });
+  console.log(await response.json());
+
+  return NextResponse.json(await response.json());
 }
