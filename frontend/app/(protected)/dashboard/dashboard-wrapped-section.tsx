@@ -33,13 +33,11 @@ export function DashboardWrappedSection({
   return (
     <div className="space-y-4 px-2 sm:px-4">
       <div className="mt-4 flex justify-center">
-        <Button
-          variant="default"
-          size="default"
-          onClick={createWrappedDispatch}
-        >
-          Create New Wrap
-        </Button>
+        <Form action={createWrappedDispatch}>
+          <Button variant="default" type="submit" size="default">
+            Create New Wrap
+          </Button>
+        </Form>
       </div>
       {createWrappedState?.errors?.ambiguous && (
         <p className="text-red-500">
