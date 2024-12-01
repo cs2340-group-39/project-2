@@ -80,11 +80,10 @@ def create_wrapped_data(request: HttpRequest):
     )
     tracks.append(track_object)
 
-  new = Wrapped.objects.create(
-    profile=user.profile_for_user,
-    artists=[artist.model_dump() for artist in artists],
-    tracks=[track.model_dump() for track in tracks],
-  )
+  new = Wrapped.objects.create(profile=user.profile_for_user)
+  new.artists.extend([artist.model_dump() for artist in artists])
+  new.tracks.extend([track.model_dump() for track in tracks])
+  new.save()
 
   return 201, WrappedResponseSchema(
     id=new.id, username=user.username, artists=artists, tracks=tracks

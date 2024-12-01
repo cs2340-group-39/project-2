@@ -1,9 +1,5 @@
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from users.models import Profile
-
-from .db_schemas import ArtistSchema, TrackSchema
-from .fields import PydanticJSONField
 
 
 class Wrapped(models.Model):
@@ -15,9 +11,5 @@ class Wrapped(models.Model):
 
   public = models.BooleanField(default=False)
 
-  artists = ArrayField(
-    PydanticJSONField(pydantic_model=ArtistSchema), size=3
-  )
-  tracks = ArrayField(
-    PydanticJSONField(pydantic_model=TrackSchema), size=2
-  )
+  artists = models.JSONField(default=list, blank=True)
+  tracks = models.JSONField(default=list, blank=True)
