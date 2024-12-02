@@ -10,13 +10,13 @@ services:
             - frontend
             - backend
         volumes:
-            - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+            - ./nginx/development.conf:/etc/nginx/conf.d/default.conf:ro
 
     frontend:
         container_name: wrapped_frontend
         build: ./frontend
         env_file:
-            - ./backend/.env.local
+            - ./backend/.env.development
         ports:
             - "3000:3000"
         depends_on:
@@ -26,7 +26,7 @@ services:
         container_name: wrapped_backend
         build: ./backend
         env_file:
-            - ./backend/.env.local
+            - ./backend/.env.development
         environment:
             - PRODUCTION=False
         ports:

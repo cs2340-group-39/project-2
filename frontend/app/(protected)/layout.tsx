@@ -1,11 +1,11 @@
 import { SessionData, sessionOptions } from "@/lib/session";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({
     children,
@@ -31,11 +31,11 @@ export default async function ProtectedLayout({
             }
         );
 
-        if (!accessTokenVerificationResponse.ok) {
-            console.log(
-                `Unexpected error verifying access token: ${accessTokenVerificationResponse.statusText}`
-            );
-        }
+        // if (!accessTokenVerificationResponse.ok) {
+        //     console.log(
+        //         `Unexpected error verifying access token: ${accessTokenVerificationResponse.statusText}`
+        //     );
+        // }
 
         const accessTokenVerification = await accessTokenVerificationResponse.json();
 
@@ -51,11 +51,11 @@ export default async function ProtectedLayout({
             }
         );
 
-        if (!spotifyLinkVerificationResponse.ok) {
-            console.log(
-                `Unexpected error verifying spotify link: ${spotifyLinkVerificationResponse.statusText}`
-            );
-        }
+        // if (!spotifyLinkVerificationResponse.ok) {
+        //     console.log(
+        //         `Unexpected error verifying spotify link: ${spotifyLinkVerificationResponse.statusText}`
+        //     );
+        // }
 
         const spotifyLinkVerification = await spotifyLinkVerificationResponse.json();
 

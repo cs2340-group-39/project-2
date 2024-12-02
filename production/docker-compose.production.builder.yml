@@ -1,17 +1,6 @@
 name: wrapped_production_builder
 
 services:
-    nginx:
-        image: nginx:latest
-        container_name: wrapped_nginx_production_builder
-        ports:
-            - "80:80"
-        depends_on:
-            - frontend
-            - backend
-        volumes:
-            - ../nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-
     frontend:
         image: asheshadri2005/wrapped:frontend
         container_name: wrapped_frontend_production_builder
@@ -21,7 +10,7 @@ services:
         env_file:
             - ../frontend/.env.production
         ports:
-            - "3000:3000"
+            - "80:3000"
         depends_on:
             - backend
 

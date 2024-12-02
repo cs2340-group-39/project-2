@@ -1,5 +1,8 @@
 "use server";
 
+import { SessionData, sessionOptions } from "@/lib/session";
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
@@ -76,7 +79,10 @@ export async function loginUserAction(
         };
     }
 
-    return redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users/api/callback?access_token=${accessToken}&refresh_token=${refreshToken}`
-    );
+    const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
+    session.accessToken = accessToken;
+    session.refreshToken = refreshToken;
+    await session.save();
+
+    redirect("/dashboard");
 }

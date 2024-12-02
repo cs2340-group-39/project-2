@@ -13,7 +13,6 @@ export async function GET(request: Request) {
 
     session.accessToken = accessToken;
     session.refreshToken = refreshToken;
-    session.accessTokenVerified = true;
     await session.save();
 
     return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));

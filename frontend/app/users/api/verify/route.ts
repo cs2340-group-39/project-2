@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     const requestUrl = new URL(request.url);
     const code = requestUrl.searchParams.get("code");
 
@@ -22,10 +22,15 @@ export async function GET(request: Request) {
         accessToken = data.access_token;
         refreshToken = data.refresh_token;
     } catch {
-        return redirect("/users/signup");
+        return NextResponse.redirect(
+            new URL("/users/signup", process.env.NEXT_PUBLIC_BASE_URL)
+        );
     }
 
-    redirect(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/users/api/callback?access_token=${accessToken}&refresh_token=${refreshToken}`
+    return NextResponse.redirect(
+        new URL(
+            `/users/api/callback?access_token=${accessToken}&refresh_token=${refreshToken}`,
+            process.env.NEXT_PUBLIC_BASE_URL
+        )
     );
 }
