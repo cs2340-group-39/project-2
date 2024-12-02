@@ -1,7 +1,7 @@
 import requests
 
 
-def call_spotify(user, query: str, time_range: str, limit: int, offset: int):
+def request_spotify(user, query: str, time_range: str, limit: int, offset: int):
     url = (
         f"https://api.spotify.com/v1/me/top/{query}"
         f"?time_range={time_range}"

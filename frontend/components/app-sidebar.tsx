@@ -1,5 +1,4 @@
 import { getIronSession } from "iron-session";
-import { GalleryVerticalEnd } from "lucide-react";
 import { cookies } from "next/headers";
 import * as React from "react";
 
@@ -19,15 +18,14 @@ import {
 import { SessionData, sessionOptions } from "@/lib/session";
 import { NavUser } from "./nav-user";
 
-// This is sample data.
 const data = {
     navMain: [
         {
-            title: "Select:",
+            title: "Sidebar",
             url: "/dashboard",
             items: [
                 {
-                    title: "My Spotify Wrapped",
+                    title: "Dashboard",
                     url: "/dashboard",
                 },
                 {
@@ -35,7 +33,7 @@ const data = {
                     url: "/social",
                 },
                 {
-                    title: "About",
+                    title: "Contact the Developers",
                     url: "https://groupcs39.wixsite.com/atlanta-food-finder/team-4",
                 },
             ],
@@ -67,15 +65,11 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <a href="#">
-                                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                                    <GalleryVerticalEnd className="size-4" />
-                                </div>
-                                <div className="flex flex-col gap-0.5 leading-none">
-                                    <span className="font-semibold">Spotify Wrapped</span>
-                                    <span className="">v1.0.0</span>
-                                </div>
-                            </a>
+                            <div className="flex flex-col gap-0.5 leading-none">
+                                <span className="text-pretty font-semibold">
+                                    Group 39's Spotify Wrapped App
+                                </span>
+                            </div>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>
@@ -85,11 +79,6 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                     <SidebarMenu className="gap-2">
                         {data.navMain.map((item) => (
                             <SidebarMenuItem key={item.title}>
-                                <SidebarMenuButton asChild>
-                                    <a href={item.url} className="font-medium">
-                                        {item.title}
-                                    </a>
-                                </SidebarMenuButton>
                                 {item.items?.length ? (
                                     <SidebarMenuSub className="ml-0 border-l-0 px-1.5">
                                         {item.items.map((item) => (

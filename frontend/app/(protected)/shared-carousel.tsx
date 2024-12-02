@@ -13,7 +13,7 @@ interface CarouselItem {
     items: string[];
 }
 
-export function DashboardCarousel({ wrappedData }: { wrappedData: WrappedData }) {
+export function SharedCarousel({ wrappedData }: { wrappedData: WrappedData }) {
     let carouselItems: CarouselItem[] = [
         {
             title: "Top Artists",

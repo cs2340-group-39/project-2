@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 
 import { SessionData, sessionOptions } from "@/lib/session";
 
-export default async function ProtectedLayout({
+export default async function UsersLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
@@ -37,9 +37,13 @@ export default async function ProtectedLayout({
 
     const data = await verifyTokenAction();
 
-    if (!data.verified) {
-        redirect("/users/api/logout");
+    if (data.verified) {
+        redirect("/dashboard");
     }
 
-    return <>{children}</>;
+    return (
+        <div className="flex h-screen w-screen items-center justify-center px-4">
+            <main className="mx-auto max-w-sm">{children}</main>
+        </div>
+    );
 }

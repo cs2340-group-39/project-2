@@ -59,10 +59,6 @@ export default async function ProtectedLayout({
 
         const spotifyLinkVerification = await spotifyLinkVerificationResponse.json();
 
-        // session.accessTokenVerified = accessTokenVerification.verified;
-        // session.isLinkedWithSpotify = spotifyLinkVerification.verified;
-        // session.save();
-
         return {
             accessTokenVerified: accessTokenVerification.verified,
             spotifyLinkVerified: spotifyLinkVerification.verified,

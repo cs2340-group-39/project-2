@@ -9,7 +9,7 @@ from users.authenticators import SpotifyLinkedTokenAuthenticator, TokenAuthentic
 from .api_schemas import WrappedRequestSchema, WrappedResponseSchema
 from .db_schemas import ArtistSchema, TrackSchema
 from .models import Wrapped
-from .utils import call_spotify
+from .utils import request_spotify
 
 api = NinjaAPI(urls_namespace="wrapped:api", docs=Swagger(), docs_url="/docs/")
 
@@ -23,15 +23,23 @@ def create_wrapped_data(request: HttpRequest):
     user = request.auth
 
     try:
-        artist_response = call_spotify(
-            user=user, query="artists", time_range="medium_term", limit=3, offset=random.randint(0, 10)
+        artist_response = request_spotify(
+            user=user,
+            query="artists",
+            time_range="medium_term",
+            limit=3,
+            offset=random.randint(0, 10),
         )
     except Exception as e:
         print(e)
 
     try:
-        track_response = call_spotify(
-            user=user, query="tracks", time_range="medium_term", limit=3, offset=random.randint(0, 10)
+        track_response = request_spotify(
+            user=user,
+            query="tracks",
+            time_range="medium_term",
+            limit=3,
+            offset=random.randint(0, 10),
         )
     except Exception as e:
         print(e)

@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { useActionState } from "react";
 
 import { WrappedSectionProps } from "../definitions";
-import { DashboardCarousel } from "../shared-carousel";
+import { SharedCarousel } from "../shared-carousel";
 import {
     createWrappedDataAction,
     deleteWrappedDataAction,
@@ -30,7 +30,7 @@ export function DashboardWrappedSection({ carouselsData }: WrappedSectionProps) 
 
     return (
         <div className="space-y-4 px-2 sm:px-4">
-            <div className="mt-4 flex justify-center">
+            <div className="mt-4 flex justify-end">
                 <Form action={createWrappedDispatch}>
                     <Button variant="default" type="submit" size="default">
                         Create New Wrap
@@ -52,8 +52,11 @@ export function DashboardWrappedSection({ carouselsData }: WrappedSectionProps) 
             <Separator className="my-4 sm:my-8" />
             {carouselsData.map((wrappedData, carouselIndex) => (
                 <div key={carouselIndex} className="relative px-2 sm:px-10">
+                    <h2 className="p-4 text-lg font-semibold mb-2">
+                        Wrapped #{carouselsData[carouselIndex].id}
+                    </h2>
                     <div className="relative flex items-center justify-center">
-                        <DashboardCarousel wrappedData={wrappedData} />
+                        <SharedCarousel wrappedData={wrappedData} />
                     </div>
                     <div className="mt-2 sm:mt-4 flex justify-center gap-2 sm:gap-4">
                         <Form action={postWrappedDispatch}>
