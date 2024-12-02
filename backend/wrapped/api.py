@@ -1,3 +1,4 @@
+import random
 from typing import List
 
 from django.db.models import QuerySet
@@ -23,14 +24,14 @@ def create_wrapped_data(request: HttpRequest):
 
     try:
         artist_response = call_spotify(
-            user=user, query="artists", time_range="medium_term", limit=3, offset=0
+            user=user, query="artists", time_range="medium_term", limit=3, offset=random.randint(0, 10)
         )
     except Exception as e:
         print(e)
 
     try:
         track_response = call_spotify(
-            user=user, query="tracks", time_range="medium_term", limit=3, offset=0
+            user=user, query="tracks", time_range="medium_term", limit=3, offset=random.randint(0, 10)
         )
     except Exception as e:
         print(e)
