@@ -23,7 +23,6 @@ urlpatterns = [
     path(
         "private/",
         include([
-            path("dummy/", include("dummy.urls")),
             path("users/", include("users.urls")),
             path("wrapped/", include("wrapped.urls")),
         ]),

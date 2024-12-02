@@ -67,7 +67,7 @@ export async function AppSidebar({ ...props }: React.ComponentProps<typeof Sideb
                         <SidebarMenuButton size="lg" asChild>
                             <div className="flex flex-col gap-0.5 leading-none">
                                 <span className="text-pretty font-semibold">
-                                    Group 39's Spotify Wrapped App
+                                    Group 39&apos;s Spotify Wrapped App
                                 </span>
                             </div>
                         </SidebarMenuButton>

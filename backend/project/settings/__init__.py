@@ -1,14 +1,10 @@
 # ruff: noqa: E402 F403
 
-import os
-from pathlib import Path
 
-from dotenv import load_dotenv
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-if os.getenv("DEBUG"):
-    load_dotenv(dotenv_path=BASE_DIR / ".env.local")
 
 from .application import *
 from .authentication import *

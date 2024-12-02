@@ -25,7 +25,7 @@ def authenticate_with_spotify(request: HttpRequest):
         f"?response_type=code"
         f"&client_id={settings.SPOTIFY_CLIENT_ID}"
         f"&scope={settings.SPOTIFY_SCOPES}"
-        f"&redirect_uri={settings.SITE_URL}/users/api/o/"
+        f"&redirect_uri={settings.BASE_URL}/users/api/o/"
     )
 
 
@@ -53,7 +53,7 @@ def link_user_with_spotify(
             },
             data={
                 "code": data.code,
-                "redirect_uri": f"{settings.SITE_URL}/users/api/o/",
+                "redirect_uri": f"{settings.BASE_URL}/users/api/o/",
                 "grant_type": "authorization_code",
             },
         )

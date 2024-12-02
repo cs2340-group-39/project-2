@@ -19,12 +19,11 @@ def send_verification_email(user):
 
     context = {
         "user": user,
-        "verification_url": f"{settings.SITE_URL}/users/api/verify?code={code}",
-        "site_name": settings.SITE_NAME,
+        "verification_url": f"{settings.BASE_URL}/users/api/verify?code={code}",
         "valid_for": str(settings.AUTH_VERIFY_EMAIL_TIMEOUT),
     }
 
-    subject = "Confirm Your Email"
+    subject = "Confirm Your Signup"
     recipient_list = [user.email]
     from_email = settings.DEFAULT_FROM_EMAIL
 

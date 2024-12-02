@@ -19,19 +19,16 @@
     </head>
     <body>
         <div class="email-container">
-            <h2>Welcome to {{ site_name }}!</h2>
+            <h2>Welcome to CS2340 Group 39's Spotify Wrapped App!</h2>
             <p>Hello {{ user.username }},</p>
             <p>
                 Thank you for signing up. Please verify your email address by clicking the
                 link below:
             </p>
-            <p>{{ verification_url }}</p>
+            <a href="{{ verification_url }}"><p>Click me</p></a>
             <p>This link will expire in {{ valid_for }}.</p>
             <div class="footer">
-                <p>
-                    If you didn't create an account with {{ site_name }}, please ignore this
-                    email.
-                </p>
+                <p>If you didn't create an account with us, please ignore this email.</p>
                 <p>This is an automated message, please do not reply to this email.</p>
             </div>
         </div>

@@ -9,7 +9,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "ninja",
     "corsheaders",
-    "dummy.apps.DummyConfig",
     "users.apps.UsersConfig",
     "wrapped.apps.WrappedConfig",
 ]

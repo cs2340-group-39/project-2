@@ -41,5 +41,9 @@ export default async function ProtectedLayout({
         redirect("/users/api/logout");
     }
 
-    return <>{children}</>;
+    return (
+        <div className="flex h-screen w-screen items-center justify-center px-4">
+            <main className="mx-auto max-w-sm">{children}</main>
+        </div>
+    );
 }

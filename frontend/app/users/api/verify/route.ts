@@ -15,18 +15,6 @@ export async function GET(request: Request) {
         cache: "no-store",
     });
 
-    let errorMessage: string;
-    if (!response.ok) {
-        try {
-            const errorData = await response.json();
-            errorMessage = errorData.detail;
-        } catch {
-            errorMessage = `Signup failed: ${response.statusText}.`;
-        }
-
-        return redirect("users/signup");
-    }
-
     let accessToken: string;
     let refreshToken: string;
     try {

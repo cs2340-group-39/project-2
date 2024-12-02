@@ -1,18 +1,26 @@
 .PHONY: start stop restart prune
 
 start:
-	docker-compose up --build -d --remove-orphans
+	DOCKER_BUILDKIT=1 docker-compose up --build -d --remove-orphans
 
 stop:
 	docker-compose down
 
 restart:
 	docker-compose down
-	docker-compose build
+	DOCKER_BUILDKIT=1 docker-compose build
 	docker-compose up -d
 
-production:
-	echo "Not Implemented"
+build-deployment:
+	DOCKER_BUILDKIT=1 docker compose -f ./production/docker-compose.production.builder.yml up --build
+
+test-deployment:
+	DOCKER_BUILDKIT=1 docker compose -f ./production/docker-compose.production.yml up --build
+
+push-deployment:
+	DOCKER_BUILDKIT=1 docker compose -f ./production/docker-compose.production.builder.yml build
+	docker push asheshadri2005/wrapped:backend
+	docker push asheshadri2005/wrapped:frontend
 
 prune:
 	docker system prune
