@@ -28,10 +28,6 @@ export default async function UsersLayout({
             }
         );
 
-        if (!response.ok) {
-            redirect("/users/api/logout");
-        }
-
         return await response.json();
     }
 
