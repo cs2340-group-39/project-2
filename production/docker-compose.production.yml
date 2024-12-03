@@ -3,7 +3,7 @@ name: wrapped_production
 services:
     nginx:
         image: asheshadri2005/wrapped:nginx
-        container_name: wrapped_nginx_production_builder
+        container_name: wrapped_nginx_production
         build:
             context: ../nginx
             dockerfile: ../nginx/production.Dockerfile
