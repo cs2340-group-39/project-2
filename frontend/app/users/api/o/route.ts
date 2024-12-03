@@ -11,7 +11,11 @@ export async function GET(request: Request) {
 
     const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
 
-    // If the session doesn't exist, then we need to just redirect to the login page
+    if (!session.accessToken) {
+        return NextResponse.redirect(
+            new URL("/users/login", process.env.NEXT_PUBLIC_BASE_URL)
+        );
+    }
 
     const response = await fetch(
         "http://backend:8000/private/users/api/link-user-with-spotify",
@@ -28,18 +32,21 @@ export async function GET(request: Request) {
         }
     );
 
-    if (!response.ok) {
-        return NextResponse.json({
-            error: "There was an error.",
-        });
+    let accessToken: string;
+    let refreshToken: string;
+    try {
+        const data = await response.json();
+        accessToken = data.access_token;
+        refreshToken = data.refresh_token;
+    } catch {
+        return NextResponse.redirect(
+            new URL("/users/signup", process.env.NEXT_PUBLIC_BASE_URL)
+        );
     }
 
-    const data = await response.json();
+    session.accessToken = accessToken;
+    session.refreshToken = refreshToken;
+    await session.save();
 
-    return NextResponse.redirect(
-        new URL(
-            `/users/api/callback?access_token=${data.access_token}&refresh_token=${data.refresh_token}`,
-            process.env.NEXT_PUBLIC_BASE_URL
-        )
-    );
+    return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));
 }

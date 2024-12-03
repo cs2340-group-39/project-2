@@ -1,16 +1,50 @@
 name: wrapped_production_builder
 
 services:
-    frontend:
+    nginx:
+        image: asheshadri2005/wrapped:nginx
+        container_name: wrapped_nginx_production_builder
+        build:
+            context: ../nginx
+            dockerfile: ../nginx/production.Dockerfile
+        ports:
+            - "80:80"
+        depends_on:
+            - frontend1
+            - frontend2
+            - frontend3
+            - backend
+
+    frontend1:
         image: asheshadri2005/wrapped:frontend
-        container_name: wrapped_frontend_production_builder
+        container_name: wrapped_frontend1_production_builder
         build:
             context: ../frontend
             dockerfile: ../frontend/production.Dockerfile
         env_file:
             - ../frontend/.env.production
-        ports:
-            - "80:3000"
+        depends_on:
+            - backend
+
+    frontend2:
+        image: asheshadri2005/wrapped:frontend
+        container_name: wrapped_frontend2_production_builder
+        build:
+            context: ../frontend
+            dockerfile: ../frontend/production.Dockerfile
+        env_file:
+            - ../frontend/.env.production
+        depends_on:
+            - backend
+
+    frontend3:
+        image: asheshadri2005/wrapped:frontend
+        container_name: wrapped_frontend3_production_builder
+        build:
+            context: ../frontend
+            dockerfile: ../frontend/production.Dockerfile
+        env_file:
+            - ../frontend/.env.production
         depends_on:
             - backend
 
@@ -22,16 +56,12 @@ services:
             dockerfile: ../backend/production.Dockerfile
         env_file:
             - ../backend/.env.production
-        ports:
-            - "8000:8000"
         depends_on:
             - database
 
     database:
         container_name: wrapped_database_production_builder
         image: postgres:latest
-        ports:
-            - "5432:5432"
         environment:
             - POSTGRES_PASSWORD=postgres
             - PGDATA=/var/lib/postgresql/data/pgdata

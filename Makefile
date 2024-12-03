@@ -21,6 +21,7 @@ push-deployment:
 	DOCKER_BUILDKIT=1 docker compose -f ./production/docker-compose.production.builder.yml build
 	docker push asheshadri2005/wrapped:backend
 	docker push asheshadri2005/wrapped:frontend
+	docker push asheshadri2005/wrapped:nginx
 
 prune:
 	docker system prune

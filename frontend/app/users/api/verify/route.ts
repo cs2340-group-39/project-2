@@ -1,4 +1,8 @@
+import { getIronSession } from "iron-session";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+
+import { SessionData, sessionOptions } from "@/lib/session";
 
 export async function GET(request: NextRequest) {
     const requestUrl = new URL(request.url);
@@ -27,10 +31,11 @@ export async function GET(request: NextRequest) {
         );
     }
 
-    return NextResponse.redirect(
-        new URL(
-            `/users/api/callback?access_token=${accessToken}&refresh_token=${refreshToken}`,
-            process.env.NEXT_PUBLIC_BASE_URL
-        )
-    );
+    const session = await getIronSession<SessionData>(await cookies(), sessionOptions);
+
+    session.accessToken = accessToken;
+    session.refreshToken = refreshToken;
+    await session.save();
+
+    return NextResponse.redirect(new URL("/dashboard", process.env.NEXT_PUBLIC_BASE_URL));
 }

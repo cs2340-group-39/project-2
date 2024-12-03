@@ -2,15 +2,13 @@ name: wrapped
 
 services:
     nginx:
-        image: nginx:latest
         container_name: wrapped_nginx
+        build: ./nginx
         ports:
             - "80:80"
         depends_on:
             - frontend
             - backend
-        volumes:
-            - ./nginx/development.conf:/etc/nginx/conf.d/default.conf:ro
 
     frontend:
         container_name: wrapped_frontend
