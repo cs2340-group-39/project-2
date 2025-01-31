@@ -11,40 +11,21 @@ from . import User
 
 
 def send_verification_email(user):
-  code = uuid.uuid4()
+    code = uuid.uuid4()
 
-  User.objects.filter(pk=user.uuid).update(
-    email_verification_code=code,
-    email_verification_code_created_at=timezone.now(),
-  )
+    User.objects.filter(pk=user.uuid).update(email_verification_code=code, email_verification_code_created_at=timezone.now())
 
-  context = {
-    'user': user,
-    'verification_url': f'{settings.BASE_URL}/users/api/verify?code={code}',
-    'valid_for': str(settings.AUTH_VERIFY_EMAIL_TIMEOUT),
-  }
+    context = {"user": user, "verification_url": f"{settings.BASE_URL}/users/api/verify?code={code}", "valid_for": str(settings.AUTH_VERIFY_EMAIL_TIMEOUT)}
 
-  subject = 'Confirm Your Signup'
-  recipient_list = [user.email]
-  from_email = settings.DEFAULT_FROM_EMAIL
+    subject = "Confirm Your Signup"
+    recipient_list = [user.email]
+    from_email = settings.DEFAULT_FROM_EMAIL
 
-  html_content = render_to_string('users/emails/verify_email.html', context)
-  text_content = strip_tags(html_content)
+    html_content = render_to_string("users/emails/verify_email.html", context)
+    text_content = strip_tags(html_content)
 
-  with get_connection(
-    host=settings.RESEND_SMTP_HOST,
-    port=settings.RESEND_SMTP_PORT,
-    username=settings.RESEND_SMTP_USERNAME,
-    password=os.getenv('RESEND_API_KEY'),
-    use_tls=True,
-  ) as connection:
-    email = EmailMultiAlternatives(
-      subject=subject,
-      body=text_content,
-      to=recipient_list,
-      from_email=from_email,
-      connection=connection,
-    )
+    with get_connection(host=settings.RESEND_SMTP_HOST, port=settings.RESEND_SMTP_PORT, username=settings.RESEND_SMTP_USERNAME, password=os.getenv("RESEND_API_KEY"), use_tls=True) as connection:
+        email = EmailMultiAlternatives(subject=subject, body=text_content, to=recipient_list, from_email=from_email, connection=connection)
 
-    email.attach_alternative(html_content, 'text/html')
-    email.send()
+        email.attach_alternative(html_content, "text/html")
+        email.send()

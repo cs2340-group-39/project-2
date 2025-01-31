@@ -18,13 +18,4 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-urlpatterns = [
-  path('private/admin/', admin.site.urls),
-  path(
-    'private/',
-    include([
-      path('users/', include('users.urls')),
-      path('wrapped/', include('wrapped.urls')),
-    ]),
-  ),
-]
+urlpatterns = [path("private/admin/", admin.site.urls), path("private/", include([path("users/", include("users.urls")), path("wrapped/", include("wrapped.urls"))]))]
