@@ -1,1 +1,1 @@
-You can find the project hosted at https://cs2340-group-39.com
+A demo video is available here: https://www.youtube.com/watch?v=YOYYtKxkTqg
